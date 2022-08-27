@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/user', [UserController::class, 'getList'])->name('getListUser');
+//Route::get('/{id}', [UserController::class, 'get'])->name('getUser');
+// Route::post('/', [UserController::class, 'store'])->name('postUser');
+//Route::post('/{id}', [UserController::class, 'update'])->name('putUser');
+//Route::delete('/{id}', [UserController::class, 'delete'])->name('deleteUser');
