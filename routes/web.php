@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 
 Route::get('/user', [UserController::class, 'getList'])->name('getListUser');
-//Route::get('/{id}', [UserController::class, 'get'])->name('getUser');
-// Route::post('/', [UserController::class, 'store'])->name('postUser');
-//Route::post('/{id}', [UserController::class, 'update'])->name('putUser');
+Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
+Route::post('/user', [UserController::class, 'store'])->name('postUser');
+Route::post('/user/{id}', [UserController::class, 'update'])->name('putUser');
 //Route::delete('/{id}', [UserController::class, 'delete'])->name('deleteUser');
