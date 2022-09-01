@@ -1,15 +1,15 @@
 <?php 
 
 namespace App\Services;
-use App\Repositories\UserRepositoryInterface;
+use App\Repositories\ProjectRepositoryInterface;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 
-class UserService
+class ProjectService
 {
     private $repo;
 
-    public function __construct(UserRepositoryInterface $repo)
+    public function __construct(ProjectRepositoryInterface $repo)
     {
         $this->repo = $repo;
     }
