@@ -14,11 +14,9 @@ class ProjectController extends Controller
         $this->service = $service;
     }
     
-    public function getList()
+    public function getListGroup()
     {
-
-        return 'ola';
-        return $this->service->getList();
+        return $this->service->getListGroup();
     }
     
     public function get($id)
@@ -26,9 +24,12 @@ class ProjectController extends Controller
         return $this->service->get($id);
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        return $this->service->store($request);
+        $json = file_get_contents('php://input');
+        $jsonData = json_decode($json, true);
+       
+        return $this->service->store($jsonData);
     }
 
     public function update(Request $request, $id)

@@ -14,121 +14,57 @@ class ProjectService
         $this->repo = $repo;
     }
 
-    public function store($request)
+    public function store($jsonData)
     {
-        $message = [
-            'name.required' => 'O nome do usuário é obrigatório!',
-            'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
-            'name.max' => 'É necessário no Máximo 255 caracteres no nome do usuário!',
+        // Teste
+        $quadroExiste = true; 
 
-            'email.required' => 'O email do usuário é obrigatório!',
-            'email.email' => 'O e-mail é inválido',
-            'email.unique' => 'O e-mail já existe',
-           
-            'password.required' => 'A senha é obrigatório!',
-            'password.min' => 'É necessário no mínimo 5 caracteres na senha usuário!',
-            'password.max' => 'É necessário no Máximo 10 caracteres na senha do usuário!',
-            'password.confirmed' => 'É necessário confirmar a senha!',
-        ];
+        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2";
+        $token = $jsonData['token']; 
 
-        $data = $request->validate([
-            'name' => 'required|string|min:5|max:255',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:5|max:10|confirmed',
-            'password_confirmation' => 'required|string|min:5|max:10',
-            'avatar' => 'image',
-        ], $message);
+        $group = $this->repo->getListGroup();
 
-         
-        if($request['avatar']) {
-            $file = $data['avatar'];
+        // Token validation
+        if($token == $tokenSystem) {
 
-            $nameFile = $file->getClientOriginalName();
-            $file = $file->storeAs('users', $nameFile);
-            $data['avatar'] = $file;
+            // Verifica se o grupo já existe no monday
+            // Se já existir ele apenas adicionar o item no group
+            if(in_array($jsonData['nomesFunisProjeto'], $group)){
+
+                return 'Mondayaaa';
+
+            }else {
+
+                // Ele cria o group junto com o item para quando não existir
+                return 'Funnil';
+            }
+
+        }else {
+            return 'Token invalido!';
         }
+        
         return $this->repo->store($data);
     }
 
-    public function getList()
+    public function getListGroup()
     {
-        return $this->repo->getList();
+        return $this->repo->getListGroup();
     }
 
-    public function get($id)
+    public function getGroup($id)
     {
-        return $this->repo->get($id);
+        //return $this->repo->get($id);
     }
 
     public function update($request, $id)
     {
-        $findEmail = $this->repo->get($id); // encontrar dados do usuário
-
-        if($findEmail['email'] == $request['email']) {
-            $message = [
-                'name.required' => 'O nome do usuário é obrigatório!',
-                'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
-                'name.max' => 'É necessário no Máximo 255 caracteres no nome do usuário!',
-
-                'password.required' => 'A senha é obrigatório!',
-                'password.min' => 'É necessário no mínimo 5 caracteres na senha usuário!',
-                'password.max' => 'É necessário no Máximo 10 caracteres na senha do usuário!',
-                'password.confirmed' => 'É necessário confirmar a senha!',
-            ];
-    
-            $data = $request->validate([
-                'name' => 'required|string|min:5|max:255',
-                'password' => 'required|string|min:5|max:10|confirmed',
-                'password_confirmation' => 'required|string|min:5|max:10',
-                'avatar' => 'image',
-            ], $message);
-        }else {
-            $message = [
-                'name.required' => 'O nome do usuário é obrigatório!',
-                'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
-                'name.max' => 'É necessário no Máximo 255 caracteres no nome do usuário!',
-    
-                'email.required' => 'O email do usuário é obrigatório!',
-                'email.email' => 'O e-mail é inválido',
-                'email.unique' => 'O e-mail já existe',
-               
-                'password.required' => 'A senha é obrigatório!',
-                'password.min' => 'É necessário no mínimo 5 caracteres na senha usuário!',
-                'password.max' => 'É necessário no Máximo 10 caracteres na senha do usuário!',
-                'password.confirmed' => 'É necessário confirmar a senha!',
-            ];
-    
-            $data = $request->validate([
-                'name' => 'required|string|min:5|max:255',
-                'email' => 'required|email',
-                'password' => 'required|string|min:5|max:10|confirmed',
-                'password_confirmation' => 'required|string|min:5|max:10',
-                'avatar' => 'image',
-            ], $message);
-        }
-        
-        if($request['avatar']) {
-            $file = $data['avatar'];
-
-            $nameFile = $file->getClientOriginalName(); 
-
-            // Encontrar arquivo antigo para deletar
-            $oldFile = $this->repo->get($id); // encontrar dados do usuário
-            Storage::disk('public')->delete("$oldFile->avatar");  
-
-
-            // parei aqui deletar imagens dos avatas
-
-
-            $file = $file->storeAs('users', $nameFile);
-            $data['avatar'] = $file;
-        }
-        return $this->repo->update($data, $id);
+        //$findEmail = $this->repo->get($id); // encontrar dados do usuário
+        //return $this->repo->update($data, $id);
     }
 
     public function destroy($id)
     {
-        return $this->repo->destroy($id);
+        //return $this->repo->destroy($id);
     }
 }
 

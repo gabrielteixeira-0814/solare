@@ -18,9 +18,11 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
         return $this->model->create($data);
     }
 
-    public function getList()
+    public function getListGroup()
     {
-        return $this->model->all();
+        $group = ['Monday', 'Negocio'];
+
+        return $group;
     }
 
     public function get($id)
