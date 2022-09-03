@@ -28,7 +28,7 @@ class ProjectController extends Controller
     {
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
-       
+
         return $this->service->store($jsonData);
     }
 
@@ -37,8 +37,16 @@ class ProjectController extends Controller
         return $this->service->update($request, $id);
     }
 
-    public function delete($id)
+    public function delete()
     {
-        return $this->service->destroy($id);
+        $json = file_get_contents('php://input');
+        $jsonData = json_decode($json, true);
+
+        return $this->service->destroy($jsonData);
+    }
+
+    public function teste()
+    {
+        return $this->repo->create_group(121321, 'monday');
     }
 }
