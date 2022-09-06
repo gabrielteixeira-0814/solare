@@ -42,11 +42,6 @@ class ProjectController extends Controller
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
 
-        return $this->service->destroy($jsonData);
-    }
-
-    public function teste()
-    {
-        return $this->repo->create_group(121321, 'monday');
+        return $this->service->delete($jsonData);
     }
 }

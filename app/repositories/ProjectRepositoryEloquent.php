@@ -15,44 +15,21 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 
     public function store(array $data)
     {
-        /** Conexão com api monday**/
-        $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3ODk0MjkyMywidWlkIjozMzY4NDY4MywiaWFkIjoiMjAyMi0wOS0wMlQyMTo0MTo1My4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMyMzU3ODQsInJnbiI6InVzZTEifQ.sQSfb09nAo5DmaWjaS2VMTgZrRcpEDZkxGcfMFtAo0U';
-
-
-        $apiUrl = 'https://api.monday.com/v2';
-        $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
-
-        $query = ' { mutation($itemName: String! ) { create_item (board_id: , item_name:$itemName){id} }';
-        $vars = [
-            'itemName' => 'Hello, world!'
-        ];
-
-        $data = @file_get_contents($apiUrl, false, stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => $headers,
-                'content' => json_encode(['query' => $query, 'variables' => $vars]),
-            ]
-        ]));
+       
         
-        $group = json_decode($data, true);
-
-
-        return $vars;
-
         return $this->model->create($data);
     }
 
     public function getListGroup()
     {
        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3ODk0MjkyMywidWlkIjozMzY4NDY4MywiaWFkIjoiMjAyMi0wOS0wMlQyMTo0MTo1My4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMyMzU3ODQsInJnbiI6InVzZTEifQ.sQSfb09nAo5DmaWjaS2VMTgZrRcpEDZkxGcfMFtAo0U';
+       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
 
 
        $apiUrl = 'https://api.monday.com/v2';
        $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
 
-       $query = ' { boards (limit:1) {groups {title id} } }';
+       $query = ' { boards (limit:1, ids: [3189733335]) {groups {title id} } }';
 
        $data = @file_get_contents($apiUrl, false, stream_context_create([
           'http' => [
@@ -68,7 +45,13 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
        $groups = $groups['data']['boards'];
 
        foreach ($groups[0]['groups'] as $data) {
-            $list[] = $data['id'];
+
+        $group = [
+            'id' => $data['id'],
+            'name' => $data['title'],
+        ];
+
+            $list[] =  $group;
        }
 
        return $list;
@@ -84,38 +67,32 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
         return $this->model->find($id)->update($data);
     }
 
-    public function destroy($id)
+    public function delete()
     {
-        return $this->model->find($id)->delete();
-    }
-
-    public function create_group($board_id, $group_name)
-    {
-
-        return $board_id;
         /** Conexão com api monday**/
-        $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3ODk0MjkyMywidWlkIjozMzY4NDY4MywiaWFkIjoiMjAyMi0wOS0wMlQyMTo0MTo1My4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMyMzU3ODQsInJnbiI6InVzZTEifQ.sQSfb09nAo5DmaWjaS2VMTgZrRcpEDZkxGcfMFtAo0U';
+       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
 
-        $apiUrl = 'https://api.monday.com/v2';
-        $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
 
-        $query = ' { mutation($boardId: Int!, $groupName: String! ) { create_group (board_id: $boardId, group_name: $groupName){id} }';
-        $vars = [
-            'boardId' => $board_id,
-            'groupName' => $group_name
-        ];
+       $apiUrl = 'https://api.monday.com/v2';
+       $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
 
-        $data = @file_get_contents($apiUrl, false, stream_context_create([
-            'http' => [
-                'method' => 'POST',
-                'header' => $headers,
-                'content' => json_encode(['query' => $query, 'variables' => $vars]),
-            ]
-        ]));
+        $query = 'mutation($itemId: Int!) { delete_item(item_id: $itemId){id}}';
+
+                $vars = [
+                    'itemId' => 3189917469
+                ];
         
-        $groups = json_decode($data, true);
+                $data = @file_get_contents($apiUrl, false, stream_context_create([
+                   'http' => [
+                       'method' => 'POST',
+                       'header' => $headers,
+                       'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
+                   ]
+                ]));
+                
+                $json = json_decode($data, true);
 
-        return $groups;
+                return 'Criando com o grupo existente!';
     }
 }
 
