@@ -28,6 +28,5 @@ Route::get('/', function () {
 
 // Project
 
-Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
