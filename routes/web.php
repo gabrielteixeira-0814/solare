@@ -20,9 +20,6 @@ Route::get('/', function () {
     return 'ola';
 });
 
-Route::get('/ler', function () {
-    return 'olaaaaaaaaaaaaaaaaaa';
-});
 
 // Route::get('/user', [UserController::class, 'getList'])->name('getListUser');
 // Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
@@ -33,5 +30,5 @@ Route::get('/ler', function () {
 // Project
 Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
-//Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
+Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
