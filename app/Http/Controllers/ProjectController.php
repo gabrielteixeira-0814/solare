@@ -16,39 +16,39 @@ class ProjectController extends Controller
     
     public function getListGroup()
     {
-        return $this->service->getListGroup();
+        //return $this->service->getListGroup();
     }
     
     public function get($id)
     {
-        return $this->service->get($id);
+        //return $this->service->get($id);
     }
 
     public function store()
     {
-        $json = file_get_contents('php://input');
-        $jsonData = json_decode($json, true);
+        // $json = file_get_contents('php://input');
+        // $jsonData = json_decode($json, true);
 
-        $arquivo = 'inputs.json';
-        $json = json_encode($jsonData);
-        $file = fopen("" . '' . $arquivo,'w');
-        fwrite($file, $json);
-        fclose($file);
+        // $arquivo = 'inputs.json';
+        // $json = json_encode($jsonData);
+        // $file = fopen("" . '' . $arquivo,'w');
+        // fwrite($file, $json);
+        // fclose($file);
 
-        return $this->service->store($jsonData);
+        // return $this->service->store($jsonData);
     }
 
     public function update(Request $request, $id)
     {
-        return $this->service->update($request, $id);
+        //return $this->service->update($request, $id);
     }
 
     public function delete()
     {
-        $json = file_get_contents('php://input');
-        $jsonData = json_decode($json, true);
+        // $json = file_get_contents('php://input');
+        // $jsonData = json_decode($json, true);
 
-        return $this->service->delete($jsonData);
+        // return $this->service->delete($jsonData);
     }
 
     public function getRead()
