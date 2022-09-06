@@ -117,7 +117,7 @@ class ProjectService
             return 'Token invalido!';
         }
         
-        return $this->repo->store($data);
+        //return $this->repo->store($data);
     }
 
     public function getListGroup()
@@ -177,8 +177,8 @@ class ProjectService
                         $idGroup = $data['id'];
                     }
                 }
-               // return $itemDoGroup;
-                // Encontrar grupo
+
+                // Encontrar item do grupo
                 foreach ($itemDoGroup as $data) {
                     if($idGroup == $data['group']['id']){
 
@@ -223,7 +223,7 @@ class ProjectService
             return 'Token invalido!';
         }
 
-        return $this->repo->delete();
+        //return $this->repo->delete();
     }
 }
 
