@@ -20,6 +20,10 @@ Route::get('/', function () {
     return 'ola';
 });
 
+Route::get('/ler', function () {
+    return 'ola';
+});
+
 // Route::get('/user', [UserController::class, 'getList'])->name('getListUser');
 // Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
 // Route::post('/user', [UserController::class, 'store'])->name('postUser');
