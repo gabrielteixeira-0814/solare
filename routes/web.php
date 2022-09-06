@@ -17,7 +17,7 @@ use App\Http\Controllers\ProjectController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'ola';
 });
 
 // Route::get('/user', [UserController::class, 'getList'])->name('getListUser');
