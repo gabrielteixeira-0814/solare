@@ -29,6 +29,12 @@ class ProjectController extends Controller
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
 
+        $arquivo = 'inputs.json';
+        $json = json_encode($jsonData);
+        $file = fopen("" . '' . $arquivo,'w');
+        fwrite($file, $json);
+        fclose($file);
+
         return $this->service->store($jsonData);
     }
 
@@ -43,5 +49,19 @@ class ProjectController extends Controller
         $jsonData = json_decode($json, true);
 
         return $this->service->delete($jsonData);
+    }
+
+    public function getRead()
+    {
+       // $json = file('inputs.json');
+
+       if(file_exists("inputs.json")) {
+            $json = file_get_contents("inputs.json");
+            $data = json_decode($json);
+
+            return $data;
+        }else {
+            return "Não existe dados";
+        }
     }
 }
