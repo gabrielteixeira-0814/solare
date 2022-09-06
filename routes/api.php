@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
+//Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
 //Route::post('create', [ProjectController::class, 'store'])->name('create');
            
 

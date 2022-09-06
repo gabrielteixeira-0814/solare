@@ -3,8 +3,8 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ProjectController;
-
+use App\Http\Controllers\ProjectController;  
+use App\Http\Controllers\ProductController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,5 +30,5 @@ Route::get('/', function () {
 // Project
 Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
-Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
+Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
