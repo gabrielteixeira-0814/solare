@@ -8,9 +8,10 @@ class ProductController extends Controller
 {
 
     public function store(){
+
         //* Variáveis globais
-        $board_id = 3189733335; //? Id do board
-        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; //? Token usado no gatilho do sistema da SolarMarket
+        $board_id = 3189733335; 
+        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
 
         //* Conexão com api monday
         $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
@@ -34,9 +35,9 @@ class ProductController extends Controller
        ]));
        
        $groups = json_decode($data, true);
-       
+
        //* Tratamento do dado recebido para se obter uma lista de nomes de grupo
-       $listGroup = []; //? Lista com id e nome para uso futuro do id
+       $listGroup = []; 
        $groups = $groups['data']['boards']; 
 
        foreach ($groups[0]['groups'] as $data) {
@@ -48,20 +49,46 @@ class ProductController extends Controller
             $listGroup[] =  $group;
        }
        
-        $listNameGroup = []; //? Lista só com os nomes de grupo para usar no in_array()
+        $listNameGroup = []; 
 
         foreach ($listGroup as $data) {
             $listNameGroup[] = $data['name'];
         }
 
-        //* Token validation
+       //* Buscar colunas
+       $query = '{ boards (limit:1, ids: [3189733335]){columns {title id}}}';
+
+       $data = @file_get_contents($apiUrl, false, stream_context_create([
+          'http' => [
+              'method' => 'POST',
+              'header' => $headers,
+              'content' => json_encode(['query' => $query]),
+          ]
+       ]));
+       
+       $columns = json_decode($data, true);
+
+       //* Tratamento do dado recebido para se obter uma lista de nomes de colunas
+       $listColumn = []; 
+       $columns = $columns['data']['boards']; 
+
+       foreach ($columns[0]['columns'] as $data) {
+            $column = [
+                'id' => $data['id'],
+                'name' => $data['title']
+            ];
+
+            $listColumn[] =  $column;
+       }
+      
+        // Token validation
         if($token == $tokenSystem) {
 
-            //* Verifica se o grupo já existe no monday
-            //* Se já existir ele apenas adicionar o item no grupo
+            // Verifica se o grupo já existe no monday
+            // Se já existir ele apenas adicionar o item no grupo
             if(in_array(ucfirst($jsonData['nomesFunisProjeto']), $listNameGroup)){
 
-                //* Encontrando id do grupo ao qual o item pertence
+                // Encontrando id do grupo ao qual o item pertence
                 foreach ($listGroup as $data) {
                     if(ucfirst($jsonData['nomesFunisProjeto']) == $data['name']){
                         $idGroup = $data['id'];
@@ -75,18 +102,18 @@ class ProductController extends Controller
                     'groupId' =>  $idGroup,
                     'itemName' => $jsonData['nome'],
                     'columnValues' => json_encode([
-                        'person' => [
-                            'personsAndTeams' => array([
-                                'id' => 33125431,
-                                'kind' => 'person'
-                            ])
-                        ],
-                        'status' => ['index' => 0],
-                        'data' => ['date' => '2022-12-01'],
-                        'texto' => 'Empadão de frango'
+                        $this->findFieldId('Nome',$listColumn) => $jsonData['nome'],
+                        $this->findFieldId('Descricão',$listColumn) => $jsonData['descricao'],
+                        $this->findFieldId('Projeto',$listColumn) => $jsonData['projeto'],
+                        $this->findFieldId('Responsável do Projeto',$listColumn) => $jsonData['nomeResponsavelProjeto'],
+                        $this->findFieldId('Identificador',$listColumn) => $jsonData['identificador'],
+                        $this->findFieldId('Quantidade de Proposta',$listColumn) => $jsonData['quantidadePropostaProjeto'],
+                        $this->findFieldId('Funil',$listColumn) => $jsonData['nomesFunisProjeto'],
+                        $this->findFieldId('Etapa',$listColumn) => $jsonData['nomeEtapasProjeto'],
+                        $this->findFieldId('E-mail do Responsável',$listColumn) => ['text' => $jsonData['emailResponsavelProjeto'],'email' => $jsonData['emailResponsavelProjeto']],
+                        $this->findFieldId('Telefone do Responsável',$listColumn) => ['phone' => $jsonData['telefoneResponsavelProjeto'],'countryShortName'=>'BR'],
+                        $this->findFieldId('status',$listColumn) => ['index' => 1]
                     ])
-
-                    //"{\"changed_at\":\"2022-09-07T14:56:04.551Z\",\"personsAndTeams\":[{\"id\":33125431,\"kind\":\"person\"}]}"
                 ];
         
                 $data = @file_get_contents($apiUrl, false, stream_context_create([
@@ -103,6 +130,56 @@ class ProductController extends Controller
 
             }else {
 
+                $dataColumn =  array(
+                    ['Nome', $jsonData['nome'], 'text'],
+                    ['Descricão', $jsonData['descricao'], 'text'],
+                    ['Projeto', $jsonData['projeto'], 'text'],
+                    ['Identificador', $jsonData['identificador'], 'text'],
+                    ['Quantidade de Proposta', $jsonData['quantidadePropostaProjeto'], 'numbers'],
+                    //['ola', $jsonData['quantidadeSolicitacoesProjeto'], 'text'],
+                    // ['Funil', $jsonData['funisProjeto'], 'text'],
+                    // ['Etapa', $jsonData['etapasProjeto'], 'text'],
+                    ['Funil', $jsonData['nomesFunisProjeto'], 'text'],
+                    ['Etapa', $jsonData['nomeEtapasProjeto'], 'text'],
+                    ['Responsável do Projeto', $jsonData['nomeResponsavelProjeto'], 'text'],
+                    ['E-mail do Responsável', $jsonData['emailResponsavelProjeto'], 'email'],
+                    ['Telefone do Responsável', $jsonData['telefoneResponsavelProjeto'], 'phone'],
+                    // ['ola', $jsonData['nomeRepresentanteProjeto'], 'text'],
+                    // ['ola', $jsonData['emailRepresentanteProjeto'], 'text'],
+                    // ['ola', $jsonData['bdi'], 'text'],
+                    // ['ola', $jsonData['formaPagamento'], 'text'],
+                    // ['ola', $jsonData['nomeCliente'], 'text'],
+                    // ['ola', $jsonData['emailCliente'], 'text'],
+                    // ['ola', $jsonData['empresaCliente'], 'text'],
+                    ['status', '', 'status'],
+                    
+                );
+
+                // foreach ($dataColumn as $data) {
+
+                //     // Ele cria as colunas ================
+                //     $query = 'mutation($boardId: Int!, $titulo: String!, $descricao: String!, $texto: ColumnType!) { create_column (board_id: $boardId, title: $titulo, description: $descricao, column_type: $texto ){id}} ';
+                    
+                //     $vars = [
+                //         'boardId' => $board_id,
+                //         'titulo' => $data[0],
+                //         'descricao' => '',
+                //         'texto' => $data[2]
+                //     ];
+
+                //     $data = @file_get_contents($apiUrl, false, stream_context_create([
+                //         'http' => [
+                //             'method' => 'POST',
+                //             'header' => $headers,
+                //             'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
+                //         ]
+                //     ]));
+
+                //     $columnData = json_decode($data, true);
+                // }
+               
+                // Ele cria as colunas =================
+              
                 // Ele cria o group junto com o item para quando não existir
                 $query = ' mutation($boardId: Int!, $groupName: String! ) { create_group (board_id: $boardId, group_name: $groupName){id}} ';
                 $vars = [
@@ -143,7 +220,7 @@ class ProductController extends Controller
                 ]));
                 
                 $json = json_decode($data, true);
-
+               
                 return 'Criou grupo com item!';
             }
 
@@ -299,5 +376,13 @@ class ProductController extends Controller
     //     }else {
     //         return "Não existe dados";
     //     }
+    }
+
+    public function findFieldId($fieldName,$array){
+        foreach($array as $item){
+            if($fieldName == $item['name']){
+                return $item['id'];
+            }
+        }
     }
 }
