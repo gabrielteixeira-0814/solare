@@ -17,7 +17,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return 'ola';
+    return view('welcome');
 });
 
 
@@ -28,7 +28,13 @@ Route::get('/', function () {
 //Route::delete('/{id}', [UserController::class, 'delete'])->name('deleteUser');
 
 // Project
-Route::post('create', [ProjectController::class, 'store'])->name('create');
+Route::post('createTeste', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
+Route::get('/', [ProjectController::class, 'getRead'])->name('getRead');
+Route::post('deleteTeste', [ProjectController::class, 'delete'])->name('delete');
+
+
+
 Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
-Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
+Route::post('/create', [ProductController::class, 'store'])->name('create');
+Route::post('delete', [ProductController::class, 'delete'])->name('delete');
