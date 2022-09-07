@@ -80,9 +80,70 @@ class ProductController extends Controller
 
             $listColumn[] =  $column;
        }
-      
+
+       $listNameColumn = []; 
+
+        foreach ($listColumn as $data) {
+            $listNameColumn[] = $data['name'];
+        }
+
         // Token validation
         if($token == $tokenSystem) {
+
+            $dataColumn =  array(
+                ['Nome', $jsonData['nome'], 'text'],
+                ['Descricão', $jsonData['descricao'], 'text'],
+                ['Projeto', $jsonData['projeto'], 'text'],
+                ['Identificador', $jsonData['identificador'], 'text'],
+                ['Quantidade de Proposta', $jsonData['quantidadePropostaProjeto'], 'numbers'],
+                //['ola', $jsonData['quantidadeSolicitacoesProjeto'], 'text'],
+                // ['Funil', $jsonData['funisProjeto'], 'text'],
+                // ['Etapa', $jsonData['etapasProjeto'], 'text'],
+                ['Funil', $jsonData['nomesFunisProjeto'], 'text'],
+                ['Etapa', $jsonData['nomeEtapasProjeto'], 'text'],
+                ['Responsável do Projeto', $jsonData['nomeResponsavelProjeto'], 'text'],
+                ['E-mail do Responsável', $jsonData['emailResponsavelProjeto'], 'email'],
+                ['Telefone do Responsável', $jsonData['telefoneResponsavelProjeto'], 'phone'],
+                // ['ola', $jsonData['nomeRepresentanteProjeto'], 'text'],
+                // ['ola', $jsonData['emailRepresentanteProjeto'], 'text'],
+                // ['ola', $jsonData['bdi'], 'text'],
+                // ['ola', $jsonData['formaPagamento'], 'text'],
+                // ['ola', $jsonData['nomeCliente'], 'text'],
+                // ['ola', $jsonData['emailCliente'], 'text'],
+                // ['ola', $jsonData['empresaCliente'], 'text'],
+                ['status', '', 'status'],
+                
+            );
+
+            
+            foreach ($dataColumn as $data) {
+
+                if(!in_array($data[0], $listNameColumn)){
+
+                    // Ele cria as colunas ================
+                    $query = 'mutation($boardId: Int!, $titulo: String!, $descricao: String!, $texto: ColumnType!) { create_column (board_id: $boardId, title: $titulo, description: $descricao, column_type: $texto ){id}} ';
+                    
+                    $vars = [
+                        'boardId' => $board_id,
+                        'titulo' => $data[0],
+                        'descricao' => '',
+                        'texto' => $data[2]
+                    ];
+
+                    $data = @file_get_contents($apiUrl, false, stream_context_create([
+                        'http' => [
+                            'method' => 'POST',
+                            'header' => $headers,
+                            'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
+                        ]
+                    ]));
+
+                    $columnData = json_decode($data, true);
+                }
+            }
+           // Criar o projeto dentro do group depois de 10 segundos
+           sleep(10);
+            // Ele cria as colunas =================
 
             // Verifica se o grupo já existe no monday
             // Se já existir ele apenas adicionar o item no grupo
@@ -155,29 +216,35 @@ class ProductController extends Controller
                     
                 );
 
-                // foreach ($dataColumn as $data) {
+                foreach ($dataColumn as $data) {
 
-                //     // Ele cria as colunas ================
-                //     $query = 'mutation($boardId: Int!, $titulo: String!, $descricao: String!, $texto: ColumnType!) { create_column (board_id: $boardId, title: $titulo, description: $descricao, column_type: $texto ){id}} ';
-                    
-                //     $vars = [
-                //         'boardId' => $board_id,
-                //         'titulo' => $data[0],
-                //         'descricao' => '',
-                //         'texto' => $data[2]
-                //     ];
+                    if(!in_array($data[0], $listNameColumn)){
 
-                //     $data = @file_get_contents($apiUrl, false, stream_context_create([
-                //         'http' => [
-                //             'method' => 'POST',
-                //             'header' => $headers,
-                //             'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
-                //         ]
-                //     ]));
+                        return $data[0];
+                       
+                        // Ele cria as colunas ================
+                        $query = 'mutation($boardId: Int!, $titulo: String!, $descricao: String!, $texto: ColumnType!) { create_column (board_id: $boardId, title: $titulo, description: $descricao, column_type: $texto ){id}} ';
+                        
+                        $vars = [
+                            'boardId' => $board_id,
+                            'titulo' => $data[0],
+                            'descricao' => '',
+                            'texto' => $data[2]
+                        ];
 
-                //     $columnData = json_decode($data, true);
-                // }
-               
+                        $data = @file_get_contents($apiUrl, false, stream_context_create([
+                            'http' => [
+                                'method' => 'POST',
+                                'header' => $headers,
+                                'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
+                            ]
+                        ]));
+
+                        $columnData = json_decode($data, true);
+                    }
+                }
+                // Criar o projeto dentro do group depois de 10 segundos
+                sleep(10);
                 // Ele cria as colunas =================
               
                 // Ele cria o group junto com o item para quando não existir
@@ -186,7 +253,6 @@ class ProductController extends Controller
                     'boardId' => $board_id,
                     'groupName' => ucfirst($jsonData['nomesFunisProjeto'])
                 ];
-
         
                 $data = @file_get_contents($apiUrl, false, stream_context_create([
                     'http' => [
@@ -203,12 +269,25 @@ class ProductController extends Controller
                 // Criar o projeto dentro do group depois de 10 segundos
                 sleep(10);
 
-                $query = 'mutation($borderId: Int!, $groupId: String!, $itemName: String!) { create_item (board_id:$borderId, group_id:$groupId, item_name:$itemName){id}}';
+                $query = 'mutation($borderId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) { create_item (board_id:$borderId, group_id:$groupId, item_name:$itemName, column_values:$columnValues){id}}';
 
                 $vars = [
                     'borderId' => $board_id,
-                    'groupId' => $groupId,
-                    'itemName' => $jsonData['nome']
+                    'groupId' =>  $groupId,
+                    'itemName' => $jsonData['nome'],
+                    'columnValues' => json_encode([
+                        $this->findFieldId('Nome',$listColumn) => $jsonData['nome'],
+                        $this->findFieldId('Descricão',$listColumn) => $jsonData['descricao'],
+                        $this->findFieldId('Projeto',$listColumn) => $jsonData['projeto'],
+                        $this->findFieldId('Responsável do Projeto',$listColumn) => $jsonData['nomeResponsavelProjeto'],
+                        $this->findFieldId('Identificador',$listColumn) => $jsonData['identificador'],
+                        $this->findFieldId('Quantidade de Proposta',$listColumn) => $jsonData['quantidadePropostaProjeto'],
+                        $this->findFieldId('Funil',$listColumn) => $jsonData['nomesFunisProjeto'],
+                        $this->findFieldId('Etapa',$listColumn) => $jsonData['nomeEtapasProjeto'],
+                        $this->findFieldId('E-mail do Responsável',$listColumn) => ['text' => $jsonData['emailResponsavelProjeto'],'email' => $jsonData['emailResponsavelProjeto']],
+                        $this->findFieldId('Telefone do Responsável',$listColumn) => ['phone' => $jsonData['telefoneResponsavelProjeto'],'countryShortName'=>'BR'],
+                        $this->findFieldId('status',$listColumn) => ['index' => 1]
+                    ])
                 ];
         
                 $data = @file_get_contents($apiUrl, false, stream_context_create([
@@ -220,7 +299,7 @@ class ProductController extends Controller
                 ]));
                 
                 $json = json_decode($data, true);
-               
+
                 return 'Criou grupo com item!';
             }
 
