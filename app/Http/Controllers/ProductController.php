@@ -7,34 +7,22 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
 
-    public function store()
-    {
-        /** Conexão com api monday**/
-        $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+    public function store(){
+        //* Variáveis globais
+        $board_id = 3189733335; //? Id do board
+        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; //? Token usado no gatilho do sistema da SolarMarket
 
+        //* Conexão com api monday
+        $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+        $apiUrl = 'https://api.monday.com/v2';
+        $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
+    
+        //* Recebe webhook
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
-
-        // $arquivo = 'inputs.json';
-        // $json = json_encode($jsonData);
-        // $file = fopen("" . '' . $arquivo,'w');
-        // fwrite($file, $json);
-        // fclose($file);
-
-
-        $board_id = 3189733335;
-        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2";
         $token = $jsonData['token']; 
 
-        
-    // Buscar grupo inicio
-
-    //     /** Conexão com api monday**/
-    //    $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
-
-       $apiUrl = 'https://api.monday.com/v2';
-       $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
-
+        //* Buscar grupo 
        $query = ' { boards (limit:1, ids: [3189733335]) {groups {title id} } }';
 
        $data = @file_get_contents($apiUrl, false, stream_context_create([
@@ -47,50 +35,58 @@ class ProductController extends Controller
        
        $groups = json_decode($data, true);
        
-       $list = [];
-       $groups = $groups['data']['boards'];
+       //* Tratamento do dado recebido para se obter uma lista de nomes de grupo
+       $listGroup = []; //? Lista com id e nome para uso futuro do id
+       $groups = $groups['data']['boards']; 
 
        foreach ($groups[0]['groups'] as $data) {
-
-        $group = [
-            'id' => $data['id'],
-            'name' => $data['title'],
-        ];
+            $group = [
+                'id' => $data['id'],
+                'name' => $data['title'],
+            ];
 
             $listGroup[] =  $group;
        }
-
-       // Buscar grupo fim
-
-        $listNameGroup = [];
+       
+        $listNameGroup = []; //? Lista só com os nomes de grupo para usar no in_array()
 
         foreach ($listGroup as $data) {
             $listNameGroup[] = $data['name'];
         }
 
-        $apiUrl = 'https://api.monday.com/v2';
-        $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
-
-        // Token validation
+        //* Token validation
         if($token == $tokenSystem) {
 
-            // Verifica se o grupo já existe no monday
-            // Se já existir ele apenas adicionar o item no group
+            //* Verifica se o grupo já existe no monday
+            //* Se já existir ele apenas adicionar o item no grupo
             if(in_array(ucfirst($jsonData['nomesFunisProjeto']), $listNameGroup)){
 
-                // Encontrar grupo
+                //* Encontrando id do grupo ao qual o item pertence
                 foreach ($listGroup as $data) {
                     if(ucfirst($jsonData['nomesFunisProjeto']) == $data['name']){
                         $idGroup = $data['id'];
                     }
                 }
 
-                $query = 'mutation($borderId: Int!, $groupId: String!, $itemName: String!) { create_item (board_id:$borderId, group_id:$groupId, item_name:$itemName){id}}';
+                $query = 'mutation($borderId: Int!, $groupId: String!, $itemName: String!, $columnValues: JSON!) { create_item (board_id:$borderId, group_id:$groupId, item_name:$itemName, column_values:$columnValues){id}}';
 
                 $vars = [
                     'borderId' => $board_id,
                     'groupId' =>  $idGroup,
-                    'itemName' => $jsonData['nome']
+                    'itemName' => $jsonData['nome'],
+                    'columnValues' => json_encode([
+                        'person' => [
+                            'personsAndTeams' => array([
+                                'id' => 33125431,
+                                'kind' => 'person'
+                            ])
+                        ],
+                        'status' => ['index' => 0],
+                        'data' => ['date' => '2022-12-01'],
+                        'texto' => 'Empadão de frango'
+                    ])
+
+                    //"{\"changed_at\":\"2022-09-07T14:56:04.551Z\",\"personsAndTeams\":[{\"id\":33125431,\"kind\":\"person\"}]}"
                 ];
         
                 $data = @file_get_contents($apiUrl, false, stream_context_create([
@@ -102,6 +98,8 @@ class ProductController extends Controller
                 ]));
                 
                 $json = json_decode($data, true);
+
+                return $json;
 
             }else {
 
