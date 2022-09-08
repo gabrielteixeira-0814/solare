@@ -114,7 +114,6 @@ class ProductController extends Controller
                 ['status', '', 'status'],
                 
             );
-
             
             foreach ($dataColumn as $data) {
 
