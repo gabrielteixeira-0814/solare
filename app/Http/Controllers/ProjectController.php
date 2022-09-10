@@ -31,10 +31,9 @@ class ProjectController extends Controller
 
         $arquivo = 'inputs.json';
         $json = json_encode($jsonData);
-        $file = fopen("" . '' . $arquivo,'w');
-        fwrite($file, $json);
-        fclose($file);
 
+        return $json;
+    
         return $this->service->store($jsonData);
     }
 

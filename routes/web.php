@@ -35,6 +35,7 @@ Route::post('deleteTeste', [ProjectController::class, 'delete'])->name('delete')
 
 
 
+// Teste
 Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
 Route::post('/create', [ProductController::class, 'store'])->name('create');
 Route::post('delete', [ProductController::class, 'delete'])->name('delete');
