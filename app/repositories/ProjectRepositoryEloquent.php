@@ -13,10 +13,18 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
         $this->model = $model;
     }
 
+    public function connectionApiMonday()
+    {
+       // Conexão com api monday
+       $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+
+       $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
+
+       return $headers;
+    }
+
     public function store(array $data)
     {
-       
-        
         return $this->model->create($data);
     }
 
@@ -57,6 +65,33 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
        return $list;
     }
 
+    public function getListColumns()
+    {
+        // Variáveis globais
+       $board_id = 3189733335; 
+
+       /** Conexão com api monday**/
+       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+
+
+       $apiUrl = 'https://api.monday.com/v2';
+       $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
+
+        // Buscar colunas
+        $query = '{ boards (limit:1, ids: [3189733335]){columns {title id}}}';
+        $apiUrl = 'https://api.monday.com/v2';
+        $data = @file_get_contents($apiUrl, false, stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => $headers,
+                'content' => json_encode(['query' => $query]),
+            ]
+        ]));
+      
+        $columns = json_decode($data, true);
+        return $columns;        
+    }
+
     public function get($id)
     {
         return $this->model->findOrFail($id);
@@ -69,30 +104,7 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 
     public function delete()
     {
-        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
-
-
-       $apiUrl = 'https://api.monday.com/v2';
-       $headers = ['Content-Type: application/json', 'Authorization: ' . $token];
-
-        $query = 'mutation($itemId: Int!) { delete_item(item_id: $itemId){id}}';
-
-                $vars = [
-                    'itemId' => 3189917469
-                ];
-        
-                $data = @file_get_contents($apiUrl, false, stream_context_create([
-                   'http' => [
-                       'method' => 'POST',
-                       'header' => $headers,
-                       'content' => json_encode(['query' => $query, 'variables' => json_encode($vars)]),
-                   ]
-                ]));
-                
-                $json = json_decode($data, true);
-
-                return 'Criando com o grupo existente!';
+        //
     }
 }
 

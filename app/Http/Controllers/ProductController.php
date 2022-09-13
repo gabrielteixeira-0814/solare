@@ -9,21 +9,21 @@ class ProductController extends Controller
 
     public function store(){
 
-        //* Variáveis globais
+        // Variáveis globais
         $board_id = 3189733335; 
         $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
 
-        //* Conexão com api monday
+        // Conexão com api monday
         $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
         $apiUrl = 'https://api.monday.com/v2';
         $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
     
-        //* Recebe webhook
+        // Recebe webhook
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
         $token = $jsonData['token']; 
 
-        //* Buscar grupo 
+        // Buscar grupo 
        $query = ' { boards (limit:1, ids: [3189733335]) {groups {title id} } }';
 
        $data = @file_get_contents($apiUrl, false, stream_context_create([
@@ -36,7 +36,7 @@ class ProductController extends Controller
        
        $groups = json_decode($data, true);
 
-       //* Tratamento do dado recebido para se obter uma lista de nomes de grupo
+       // Tratamento do dado recebido para se obter uma lista de nomes de grupo
        $listGroup = []; 
        $groups = $groups['data']['boards']; 
 

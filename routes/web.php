@@ -28,7 +28,7 @@ Route::get('/', function () {
 //Route::delete('/{id}', [UserController::class, 'delete'])->name('deleteUser');
 
 // Project
-Route::post('createTeste', [ProjectController::class, 'store'])->name('create');
+Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::get('/', [ProjectController::class, 'getRead'])->name('getRead');
 Route::post('deleteTeste', [ProjectController::class, 'delete'])->name('delete');
@@ -36,6 +36,6 @@ Route::post('deleteTeste', [ProjectController::class, 'delete'])->name('delete')
 
 
 // Teste
-Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
-Route::post('/create', [ProductController::class, 'store'])->name('create');
-Route::post('delete', [ProductController::class, 'delete'])->name('delete');
+//Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
+//Route::post('/create', [ProductController::class, 'store'])->name('create');
+//Route::post('delete', [ProductController::class, 'delete'])->name('delete');
