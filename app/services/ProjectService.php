@@ -18,16 +18,9 @@ class ProjectService
     {
         // Variáveis globais
        $board_id = 3189733335; 
-       $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
-
-       // Recebe webhook
-       $json = file_get_contents('php://input');
-       $jsonData = json_decode($json, true);
-       $token = $jsonData['token']; 
-
+       $tokenSystem = ""; 
        $headers = $this->repo->connectionApiMonday();
-
-        $groups = $this->getListGroup();
+       $groups = $this->getListGroup();
         
        $listNameGroup = []; 
 
@@ -73,7 +66,7 @@ class ProjectService
         );
 
        // Token validation
-       if($token == $tokenSystem) {
+       if($jsonData['token'] == $tokenSystem) {
            
            // Correndo tipo de dados
            foreach ($dataColumn as $data) {
@@ -147,7 +140,7 @@ class ProjectService
                
                $json = json_decode($data, true);
 
-               return $json;
+               return "Projeto criado com sucesso!";
 
            }else {
 
@@ -249,17 +242,10 @@ class ProjectService
 
     public function delete($jsonData)
     {
-        $json = file_get_contents('php://input');
-        $jsonData = json_decode($json, true);
-
+        
         // Variáveis globais
         $board_id = 3189733335; 
-        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
-
-        // Recebe webhook
-        $json = file_get_contents('php://input');
-        $jsonData = json_decode($json, true);
-        $token = $jsonData['token']; 
+        $tokenSystem = ""; 
         $headers = $this->repo->connectionApiMonday();
 
         // Buscar grupo
@@ -287,7 +273,7 @@ class ProjectService
         $idItem = '';
       
         // Token validation
-        if($token == $tokenSystem) {
+        if($jsonData['token'] == $tokenSystem) {
 
             // Verifica se o grupo já existe no monday
             if(in_array(ucfirst($jsonData['nomesFunisProjeto']), $listNameGroup)){
@@ -330,14 +316,13 @@ class ProjectService
                 $json = json_decode($data, true);
 
                 if($json == ''){
-                    return "Não foi encontrado o projeto requerido!";
+                    return "Não foi encontrado o projeto!";
                 }else {
-                    return $json;
+                    return "Projeto deletado com sucesso!";
                 }
            
-
             }else {
-                return "Não foi encontrado o projeto requerido!";
+                return "Não foi encontrado o projeto!";
             }
 
         }else {
@@ -345,12 +330,10 @@ class ProjectService
         }
     }
 
-
-
     public function getListGroup()
     {
        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+       $token = '';
 
 
        $apiUrl = 'https://api.monday.com/v2';
@@ -390,7 +373,7 @@ class ProjectService
        $board_id = 3189733335; 
 
        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+       $token = '';
 
 
        $apiUrl = 'https://api.monday.com/v2';

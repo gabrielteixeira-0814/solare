@@ -26,13 +26,11 @@ class ProjectController extends Controller
 
     public function store()
     {
-        $json = file_get_contents('php://input');
-        $jsonData = json_decode($json, true);
+       // Recebe webhook
+       $json = file_get_contents('php://input');
+       $jsonData = json_decode($json, true);
 
-        $arquivo = 'inputs.json';
-        $json = json_encode($jsonData);
-
-        return $this->service->store($jsonData);
+       return $this->service->store($jsonData);
     }
 
     public function update(Request $request, $id)
@@ -42,25 +40,10 @@ class ProjectController extends Controller
 
     public function delete()
     {
+        // Recebe webhook
         $json = file_get_contents('php://input');
         $jsonData = json_decode($json, true);
 
         return $this->service->delete($jsonData);
-    }
-
-    public function getRead()
-    {
-
-        return 'ola, mundo!';
-       // $json = file('inputs.json');
-
-    //    if(file_exists("inputs.json")) {
-    //         $json = file_get_contents("inputs.json");
-    //         $data = json_decode($json);
-
-    //         return $data;
-    //     }else {
-    //         return "Não existe dados";
-    //     }
     }
 }
