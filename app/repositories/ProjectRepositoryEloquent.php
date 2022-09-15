@@ -17,7 +17,6 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
     {
        // Conexão com api monday
        $tokenMonday = '';
-
        $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
 
        return $headers;
