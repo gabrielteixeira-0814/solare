@@ -63,8 +63,7 @@ class AuthController extends Controller
             'tokenn' => $token
         ];
 
-        return $response;
-        return view('home');
+        return view('home', compact('response'));
     }
 
     public function logout() 
@@ -74,5 +73,7 @@ class AuthController extends Controller
         return [
             'message' => 'Logout efetuado com sucesso e exclusão dos tokens.'
         ];
+
+        return view('login');
     }
 }

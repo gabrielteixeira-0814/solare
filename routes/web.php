@@ -19,17 +19,17 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 // Autentication
 Route::post('/register', [AuthController::class, 'register'])->name('register_users'); 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout_users');
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // User
-Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getList'])->name('getListUser');
+Route::middleware('auth:sanctum')->get('/user/list', [UserController::class, 'getList'])->name('getListUser');
 Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
 Route::post('/user', [UserController::class, 'store'])->name('postUser');
 Route::post('/user/{id}', [UserController::class, 'update'])->name('putUser');
@@ -41,7 +41,9 @@ Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getLi
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
 
 // Home
-Route::middleware('auth:sanctum')->get('/home', [HomeController::class, 'home'])->name('home');
+Route::get('/', [HomeController::class, 'home'])->name('home');
+
+
 
 
 // Teste
