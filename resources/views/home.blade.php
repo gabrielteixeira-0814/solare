@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 <div class="">
 
-  {{-- @foreach ($response as $data)
+  @foreach ($response as $data)
       <p>{{ $data }}</p>
 
       HOME
@@ -15,7 +15,7 @@
                     @csrf
                     <input id="teste" name="teste" value="1" />
                 </form>
-    @endforeach --}}
+    @endforeach
 
     hme
   </div>

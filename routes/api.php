@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProjectController;
+
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\ProjectController;  
+use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\HomeController; 
 
 
 /*
@@ -17,11 +22,10 @@ use App\Http\Controllers\ProjectController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = Auth::user();
+    return $user;
 });
 
-//Route::get('/ler', [ProjectController::class, 'getRead'])->name('getRead');
-//Route::post('create', [ProjectController::class, 'store'])->name('create');
            
 
 
