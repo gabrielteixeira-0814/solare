@@ -3,7 +3,7 @@
     <div class="col-12 col-md-4">
         <div class="row h-100 justify-content-center">
             <div class="col-10 align-self-center p-4 mb-5">
-                <div class="h3 text-center pb-3 text-black">Loginaa</div>
+                <div class="h3 text-center pb-3 text-black">Login</div>
                 <div class="mb-5">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf

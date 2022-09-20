@@ -29,7 +29,7 @@
     <div id="appDashboard">
         <header class="header" id="header">
             <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
-            <a href="" class="text-decoration-none text-dark">
+            <a href="{{ route('home')}}" class="text-decoration-none text-dark">
                 <div class=""> Gabriel <i class='bx bx-user nav_icon'></i> </div>
             </a>
         </header>

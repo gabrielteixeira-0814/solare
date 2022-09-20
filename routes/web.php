@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController; 
+use App\Http\Controllers\ProjectController;  
+use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\HomeController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +29,7 @@ Route::get('/home', function () {
 require __DIR__.'/auth.php';
 
 // User
+Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/user/list', [UserController::class, 'getList'])->name('getListUser');
 Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
 Route::post('/user', [UserController::class, 'store'])->name('postUser');

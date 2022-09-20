@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
 
-    /*** Tabela de vendas ***/
+    /*** Table project ***/
     
     $(document).ready(function(){
         carregarTabelaSale(0);
@@ -76,35 +76,35 @@ document.addEventListener("DOMContentLoaded", function(event) {
         console.log(dados);
 
         $.ajax({
-        url: "/getTableDataSale" + "?page=" + pagina,
+        url: "/user/list" + "?page=" + pagina,
         method: 'GET',
         data: dados
         }).done(function(data){
         // console.log(data);
-        $('.sale_data').html(data);
+        $('.user_data').html(data);
         });
     }
   
     
-    /*** Tabela de produtos ***/
+    /*** Table Users ***/
     
     $(document).ready(function(){
-        carregarTabelaProduct(0);
+        carregarTabelaUser(0);
     });
 
-    $(document).on('click', '.paginationProduct a', function(e) {
+    $(document).on('click', '.paginationUser a', function(e) {
         e.preventDefault();
         var pagina = $(this).attr('href').split('page=')[1];
-        carregarTabelaProduct(pagina);
+        carregarTabelaUser(pagina);
     });
 
     // Filtro
     $(document).on('keyup submit', '.form', function(e) {
         e.preventDefault();
-        carregarTabelaProduct(0);
+        carregarTabelaUser(0);
     });
 
-    function carregarTabelaProduct(pagina) {
+    function carregarTabelaUser(pagina) {
         var dados = $('#form').serialize();
 
         $.ajax({
