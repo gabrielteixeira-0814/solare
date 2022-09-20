@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.layout_login')
 <div class="row h-100">
     <div class="col-12 col-md-4">
         <div class="row h-100 justify-content-center">
@@ -37,6 +37,9 @@
                                     </button>
                                 </div>
                             </div>
+                            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                                {{ __('Forgot your password?') }}
+                            </a>
                         </div>
                     </form>
                 </div>
