@@ -20,7 +20,7 @@ class UserRepositoryEloquent implements UserRepositoryInterface
 
     public function getList()
     {
-        return $this->model->all();
+        return $this->model;
     }
 
     public function get($id)

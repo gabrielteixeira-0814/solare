@@ -50,9 +50,12 @@ class UserService
         return $this->repo->store($data);
     }
 
-    public function getList()
+    public function getList($request)
     {
-        return $this->repo->getList();
+        $search = 'Gab';
+        $users = $this->repo->getList();
+        $listUsers = $users->where('name', 'LIKE', '%'.$search.'%')->get();
+        return $listUsers;
     }
 
     public function get($id)

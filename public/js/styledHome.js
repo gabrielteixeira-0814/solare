@@ -104,16 +104,21 @@ document.addEventListener("DOMContentLoaded", function(event) {
         carregarTabelaUser(0);
     });
 
+    $("#search").keyup(function() {
+        carregarTabelaUser(0);
+      });
+
     function carregarTabelaUser(pagina) {
-        var dados = $('#form').serialize();
+        var dados = $("#search").val();
+        //console.log(dados);
 
         $.ajax({
-        url: "/getTableDataProduct" + "?page=" + pagina,
+        url: "/user/list" + "?page=" + pagina,
         method: 'GET',
         data: dados
-        }).done(function(data){
-        //console.log(data);
-        $('.product_data').html(data);
+            }).done(function(data){
+            console.log(data);
+            $('.users_data').html(data);
         });
     }
   

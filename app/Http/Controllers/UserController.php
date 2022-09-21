@@ -19,9 +19,17 @@ class UserController extends Controller
         return view('users');
     }
     
-    public function getList()
+    public function getList(Request $request)
     {
-        return $this->service->getList();
+        if($request->ajax()){
+
+            $listUser = $this->service->getList($request);
+
+            return $listUser;
+
+            // Ele retornar toda uma pagina
+            return view('list.listUser', compact('listUser'))->render();
+        }
     }
     
     public function get($id)

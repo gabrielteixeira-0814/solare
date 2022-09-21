@@ -1,56 +1,45 @@
 <table class='table'>
-    <tr>
-        <th scope="col">
-            Produto
-        </th>
-        <th scope="col">
-            Data
-        </th>
-        <th scope="col">
-            Valor do produto
-        </th>
-        <th scope="col">
-            Quantidade
-        </th>
-        <th scope="col">
-            Valor do desconto
-        </th>
-        <th scope="col">
-            Valor
-        </th>
-        <th scope="col">
-            Ações
-        </th>
-    </tr>
-
-    @foreach ($listSale as $sale)
         <tr>
-            <td>
-                {{ $sale->product->name }}
-            </td>
-            <td>
-                {{ date("d/m/Y", strtotime($sale->dateSale)) }} 
-            </td>
-            <td>
-                R$ {{ str_replace('.', ',', $sale->product->price) }}
-            </td>
-            <td  class="pl-5">
-                {{ $sale->quantity }}
-            </td>
-            <td>
-                R$ {{ str_replace('.', ',', $sale->discount) }}
-            </td>
-            <td>
-                R$ {{ str_replace('.', ',', $sale->valueSale) }}
-            </td>
-            <td>
-                <a href='{{route('sale.edit',$sale->id)}}' class='btn btn-primary'>Editar</a>
-                <a href="{{route('sale.deleteEditsale',$sale->id)}}" class='btn btn-danger'>Deletar</a>
-            </td>
+            <th scope="col">
+                Nome
+            </th>
+            <th scope="col">
+                E-mail
+            </th>
+            <th scope="col">
+                Função
+            </th>
+            <th scope="col">
+                Data
+            </th>
+            <th scope="col">
+                Ações
+            </th>
         </tr>
-    @endforeach
-    </tr>
-</table>
-<div class="paginationUser">
-    {{ $listSale->links() }}
-</div>
+    
+        @foreach ($listUser as $user)
+            <tr>
+                <td>
+                    {{ $user->name }}
+                </td>
+                <td>
+                    {{ $user->email }}
+                </td>
+                <td>
+                    {{ $user->name }}
+                </td>
+                <td>
+                    {{ date("d/m/Y", strtotime($user->created_at)) }} 
+                </td>
+                <td>
+                    <a href='' class='btn btn-primary'>Editar</a>
+                    <a href="" class='btn btn-danger'>Deletar</a>
+                </td>
+            </tr>
+        @endforeach
+        </tr>
+    </table>
+    <div class="paginationUser">
+        <p>{{ $listUser->links() }}</p>
+    </div>
+
