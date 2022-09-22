@@ -23,12 +23,9 @@ class UserController extends Controller
     {
         if($request->ajax()){
 
+            $search = !$request['search'] ? true : false;
             $listUser = $this->service->getList($request);
-
-            return $listUser;
-
-            // Ele retornar toda uma pagina
-            return view('list.listUser', compact('listUser'))->render();
+            return view('list.listUser', compact('listUser', 'search'))->render();
         }
     }
     

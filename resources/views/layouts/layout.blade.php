@@ -6,7 +6,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/styledHome.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/styledHome.js') }}" defer></script> --}}
+    <script src="{{ asset('js/users.js') }}" defer></script>
 
      <!-- Styles -->
      <link rel='stylesheet' href="{{ url('/css/app.css') }}">
@@ -64,7 +65,7 @@
             @yield('content')
         </main>
     </div>
-    
+
     <script src="{{ url('/js/app.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

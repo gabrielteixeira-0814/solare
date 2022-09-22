@@ -109,13 +109,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       });
 
     function carregarTabelaUser(pagina) {
-        var dados = $("#search").val();
-        //console.log(dados);
+        var search = $("#search").val();
 
         $.ajax({
         url: "/user/list" + "?page=" + pagina,
         method: 'GET',
-        data: dados
+        data: {search: search} 
             }).done(function(data){
             console.log(data);
             $('.users_data').html(data);

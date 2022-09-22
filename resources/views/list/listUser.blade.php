@@ -32,14 +32,18 @@
                     {{ date("d/m/Y", strtotime($user->created_at)) }} 
                 </td>
                 <td>
-                    <a href='' class='btn btn-primary'>Editar</a>
+                    <a href="" class='btn btn-primary' data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>
+
                     <a href="" class='btn btn-danger'>Deletar</a>
                 </td>
             </tr>
         @endforeach
         </tr>
     </table>
-    <div class="paginationUser">
-        <p>{{ $listUser->links() }}</p>
-    </div>
+    @if ($search)
+        <div class="paginationUser">
+            <p>{{ $listUser->links() }}</p>
+        </div>
+    @endif
 
+  

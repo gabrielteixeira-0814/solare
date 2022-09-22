@@ -52,10 +52,17 @@ class UserService
 
     public function getList($request)
     {
-        $search = 'Gab';
-        $users = $this->repo->getList();
-        $listUsers = $users->where('name', 'LIKE', '%'.$search.'%')->get();
-        return $listUsers;
+        if($request['search']){
+
+            $users = $this->repo->getList();
+            $listUsers = $users->where('name', 'LIKE', '%'.$request['search'].'%')->get();
+            return $listUsers;
+
+        }else {
+             $users = $this->repo->getList();
+            $listUsers = $users->paginate(1);
+            return $listUsers;
+        }
     }
 
     public function get($id)
