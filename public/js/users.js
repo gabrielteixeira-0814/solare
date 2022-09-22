@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         if(toggle && nav && bodypd && headerpd){
             toggle.addEventListener('click', ()=>{
             // show navbar
-            nav.classList.toggle('show')
+            nav.classList.toggle('showHeader')
             // change icon
             toggle.classList.toggle('bx-x')
             // add padding to body
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     function carregarTabelaSale(pagina) {
         var dados = $('#form_sale').serialize();
 
-        console.log(dados);
+        //console.log(dados);
 
         $.ajax({
         url: "/user/list" + "?page=" + pagina,
@@ -114,3 +114,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
             $('.users_data').html(data);
         });
     }
+
+    // Show user
+
+    // $(document).on('click', '.save', function(e) {
+    //     var dados = $("div").text($("form").serialize());
+    //     console.log(dados);
+    // });
+

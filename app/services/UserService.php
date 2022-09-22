@@ -60,7 +60,7 @@ class UserService
 
         }else {
              $users = $this->repo->getList();
-            $listUsers = $users->paginate(1);
+            $listUsers = $users->paginate(5);
             return $listUsers;
         }
     }
