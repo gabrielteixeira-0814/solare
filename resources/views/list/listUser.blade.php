@@ -32,9 +32,10 @@
                     {{ date("d/m/Y", strtotime($user->created_at)) }} 
                 </td>
                 <td>
+                  {{ $user->id }}
                     {{-- <i class='bx bxs-show'></i> --}}
-                    <a href="" class='edit' value="1" data-toggle="modal" data-target="#user" style="color: #0099B2; font-size: 16px;"><i class='bx bxs-edit-alt'></i></a>
-                    <a href="" class='' style="color: #0099B2; font-size: 16px;" ><i class='bx bxs-trash'></i></a>
+                    <button class='edit' id='editUser' value="{{ $user->id }}" name="{{ $user->id }}" data-toggle="modal" data-target="#user" style="color: #0099B2; font-size: 16px;"><i class='bx bxs-edit-alt'></i></button>
+                    <button class='delete' id='delete' value="2" style="color: #0099B2; font-size: 16px;" ><i class='bx bxs-trash'></i></button>
                 </td>
             </tr>
         @endforeach

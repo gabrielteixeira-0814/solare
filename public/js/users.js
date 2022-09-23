@@ -79,9 +79,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
         url: "/user/list" + "?page=" + pagina,
         method: 'GET',
         data: dados
-        }).done(function(data){
-        // console.log(data);
-        $('.user_data').html(data);
+            }).done(function(data){
+                // console.log(data);
+            $('.user_data').html(data);
         });
     }
   
@@ -110,15 +110,32 @@ document.addEventListener("DOMContentLoaded", function(event) {
         method: 'GET',
         data: {search: search} 
             }).done(function(data){
-            console.log(data);
+            // console.log(data);
             $('.users_data').html(data);
         });
     }
 
     // Show user
 
-    // $(document).on('click', '.save', function(e) {
-    //     var dados = $("div").text($("form").serialize());
-    //     console.log(dados);
-    // });
+    
+    $(document).on('click', '.edit', function(e) {
+        var id = $(this).val();
+       
+        $.ajax({
+            url: "/user/"+ id + "",
+            method: 'GET',
+            data: "" 
+                }).done(function(data){
+                console.log(data);
+                $('#name').val(data.name)
+                $('#email').val(data.email)
+                $('#function').val(data.name)
+            });
+    });
+
+    $(document).on('click', '.save', function(e) {
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var funct = $("#function").val();
+    });
 
