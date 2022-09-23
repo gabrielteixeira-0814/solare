@@ -70,30 +70,36 @@ class UserService
         return $this->repo->get($id);
     }
 
-    public function update($request, $id)
+    public function update($request)
     {
-        $findEmail = $this->repo->get($id); // encontrar dados do usuário
+        $findEmail = $this->repo->get($request['id']); // encontrar dados do usuário
 
         if($findEmail['email'] == $request['email']) {
             $message = [
+
+                'id.required' => 'O id é obrigatório!',
+
                 'name.required' => 'O nome do usuário é obrigatório!',
                 'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
                 'name.max' => 'É necessário no Máximo 255 caracteres no nome do usuário!',
 
-                'password.required' => 'A senha é obrigatório!',
-                'password.min' => 'É necessário no mínimo 5 caracteres na senha usuário!',
-                'password.max' => 'É necessário no Máximo 10 caracteres na senha do usuário!',
-                'password.confirmed' => 'É necessário confirmar a senha!',
+                'email.required' => 'O email do usuário é obrigatório!',
+                'email.email' => 'O e-mail é inválido',
+                'email.unique' => 'O e-mail já existe',
             ];
     
             $data = $request->validate([
+                'id' => 'required',
                 'name' => 'required|string|min:5|max:255',
-                'password' => 'required|string|min:5|max:10|confirmed',
-                'password_confirmation' => 'required|string|min:5|max:10',
-                'avatar' => 'image',
+                'email' => 'required|email|min:5|max:255',
+                //'password_confirmation' => 'required|string|min:5|max:10',
+                //'avatar' => 'image',
             ], $message);
         }else {
             $message = [
+                
+                'id.required' => 'O id é obrigatório!',
+                
                 'name.required' => 'O nome do usuário é obrigatório!',
                 'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
                 'name.max' => 'É necessário no Máximo 255 caracteres no nome do usuário!',
@@ -101,39 +107,33 @@ class UserService
                 'email.required' => 'O email do usuário é obrigatório!',
                 'email.email' => 'O e-mail é inválido',
                 'email.unique' => 'O e-mail já existe',
-               
-                'password.required' => 'A senha é obrigatório!',
-                'password.min' => 'É necessário no mínimo 5 caracteres na senha usuário!',
-                'password.max' => 'É necessário no Máximo 10 caracteres na senha do usuário!',
-                'password.confirmed' => 'É necessário confirmar a senha!',
             ];
     
             $data = $request->validate([
+                'id' => 'required',
                 'name' => 'required|string|min:5|max:255',
                 'email' => 'required|email',
-                'password' => 'required|string|min:5|max:10|confirmed',
-                'password_confirmation' => 'required|string|min:5|max:10',
-                'avatar' => 'image',
+                //'avatar' => 'image',
             ], $message);
         }
-        
-        if($request['avatar']) {
-            $file = $data['avatar'];
 
-            $nameFile = $file->getClientOriginalName(); 
+        // if($request['avatar']) {
+        //     $file = $data['avatar'];
 
-            // Encontrar arquivo antigo para deletar
-            $oldFile = $this->repo->get($id); // encontrar dados do usuário
-            Storage::disk('public')->delete("$oldFile->avatar");  
+        //     $nameFile = $file->getClientOriginalName(); 
 
-
-            // parei aqui deletar imagens dos avatas
+        //     // Encontrar arquivo antigo para deletar
+        //     $oldFile = $this->repo->get($id); // encontrar dados do usuário
+        //     Storage::disk('public')->delete("$oldFile->avatar");  
 
 
-            $file = $file->storeAs('users', $nameFile);
-            $data['avatar'] = $file;
-        }
-        return $this->repo->update($data, $id);
+        //     // parei aqui deletar imagens dos avatas
+
+
+        //     $file = $file->storeAs('users', $nameFile);
+        //     $data['avatar'] = $file;
+        // }
+        return $this->repo->update($data);
     }
 
     public function destroy($id)

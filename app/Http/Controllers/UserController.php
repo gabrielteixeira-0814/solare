@@ -39,9 +39,11 @@ class UserController extends Controller
         return $this->service->store($request);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        return $this->service->update($request, $id);
+        if($request->ajax()){
+            return $this->service->update($request);
+        }
     }
 
     public function delete($id)

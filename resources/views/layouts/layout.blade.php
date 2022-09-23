@@ -1,6 +1,7 @@
 <html lang='pt-br'>
 <head>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>Sistema monday @yield('title')</title>
     <link href="{{ asset('/images/brand/favicon.png') }}" rel="icon" type="image/png"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">

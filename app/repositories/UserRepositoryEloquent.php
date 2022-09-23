@@ -28,9 +28,9 @@ class UserRepositoryEloquent implements UserRepositoryInterface
         return $this->model->findOrFail($id);
     }
 
-    public function update(array $data, $id)
+    public function update(array $data)
     {
-        return $this->model->find($id)->update($data);
+        return $this->model->find($data['id'])->update($data);
     }
 
     public function destroy($id)

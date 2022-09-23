@@ -38,54 +38,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
 
-    /*** Table project ***/
-    
-    $(document).ready(function(){
-        carregarTabelaSale(0);
-    });
-
-    $(document).on('click', '.paginationSale a', function(e) {
-        e.preventDefault();
-        var pagina = $(this).attr('href').split('page=')[1];
-        carregarTabelaSale(pagina);
-    });
-
-    // Filtro
-    $(document).on('submit', '.form_sale', function(e) {
-        e.preventDefault();
-
-        // Limpando o input de limpar filtro
-        $('#clearFilter').val('');
-        carregarTabelaSale(0);
-    });
-
-    // Limpar filtro
-    $(document).on('click', '.clear', function(e) {
-        e.preventDefault();
-
-        var clearFilterNoActiver = "clear";
-        $('#clearFilter').val(clearFilterNoActiver);
-        carregarTabelaSale(0);
-        
-    });
-
-    
-    function carregarTabelaSale(pagina) {
-        var dados = $('#form_sale').serialize();
-
-        //console.log(dados);
-
-        $.ajax({
-        url: "/user/list" + "?page=" + pagina,
-        method: 'GET',
-        data: dados
-            }).done(function(data){
-                // console.log(data);
-            $('.user_data').html(data);
-        });
-    }
-  
-    
     /*** Table Users ***/
     
     $(document).ready(function(){
@@ -102,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         carregarTabelaUser(0);
       });
 
+    // Search user
     function carregarTabelaUser(pagina) {
         var search = $("#search").val();
 
@@ -116,9 +69,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
 
     // Show user
-
-    
     $(document).on('click', '.edit', function(e) {
+        $("#success").hide(); //hide message
+
         var id = $(this).val();
        
         $.ajax({
@@ -126,16 +79,34 @@ document.addEventListener("DOMContentLoaded", function(event) {
             method: 'GET',
             data: "" 
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
+                $('#id').val(data.id)
                 $('#name').val(data.name)
                 $('#email').val(data.email)
                 $('#function').val(data.name)
             });
     });
 
+    // Edit user
     $(document).on('click', '.save', function(e) {
+        var id = $("#id").val();
         var name = $("#name").val();
         var email = $("#email").val();
         var funct = $("#function").val();
+
+        $("#msg").hide(); // Hidden message
+       
+        $.ajax({
+            url: "/user/edit",
+            method: 'POST',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {id: id, name: name, email: email, funct: funct},
+                }).done(function(data){
+                console.log(data);
+                    
+                if(1) {
+                    $("#success").show();
+                }
+            });
     });
 

@@ -32,8 +32,6 @@
                     {{ date("d/m/Y", strtotime($user->created_at)) }} 
                 </td>
                 <td>
-                  {{ $user->id }}
-                    {{-- <i class='bx bxs-show'></i> --}}
                     <button class='edit' id='editUser' value="{{ $user->id }}" name="{{ $user->id }}" data-toggle="modal" data-target="#user" style="color: #0099B2; font-size: 16px;"><i class='bx bxs-edit-alt'></i></button>
                     <button class='delete' id='delete' value="2" style="color: #0099B2; font-size: 16px;" ><i class='bx bxs-trash'></i></button>
                 </td>
@@ -57,8 +55,16 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
+        <div class="row justify-content-center">
+          <div class="col-10 mt-2">
+            <div class="alert alert-success text-center" id="success" role="alert">
+              Usuário editado com sucesso!
+            </div>
+          </div>
+        </div>
         <div class="modal-body">
             <form action="" class="form_user" id="form_user">
+                <input type="hidden" class="" id="id" name="id">
                 <div class="mb-3">
                   <label for="name" class="form-label">Nome</label>
                   <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
