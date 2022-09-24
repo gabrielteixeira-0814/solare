@@ -56,57 +56,88 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Search user
     function carregarTabelaUser(pagina) {
-        var search = $("#search").val();
 
+         // Gif
+         $('.users_data').html('<div class="d-flex justify-content-center mt-3 loading">Loading&#8230;</div>');
+
+        var search = $("#search").val();
+        
         $.ajax({
         url: "/user/list" + "?page=" + pagina,
         method: 'GET',
         data: {search: search} 
             }).done(function(data){
             // console.log(data);
-            $('.users_data').html(data);
+            
+            setTimeout(function() { 
+                if(data) {
+                    $('.users_data').html(data);
+                }else {
+                    $('.users_data').html('<div class="">Error</div>');
+                }
+            }, 1000);
         });
     }
 
     // Show user
     $(document).on('click', '.edit', function(e) {
+
         $("#success").hide(); //hide message
+        $(".modalGif").hide();
+        $("#gif").show();
 
         var id = $(this).val();
-       
         $.ajax({
             url: "/user/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
                 //console.log(data);
-                $('#id').val(data.id)
-                $('#name').val(data.name)
-                $('#email').val(data.email)
-                $('#function').val(data.name)
+
+                setTimeout(function() { 
+                    if(data) {
+
+                        // Gif
+                        $("#gif").hide();
+                        $(".modalGif").show();
+                        
+                        $('#id').val(data.id)
+                        $('#name').val(data.name)
+                        $('#email').val(data.email)
+                        $('#function').val(data.name)
+                    }else {
+                        console.log('Error');
+                    }
+                }, 1000);
             });
     });
 
     // Edit user
     $(document).on('click', '.save', function(e) {
+        $(".save").show();
+
         var id = $("#id").val();
         var name = $("#name").val();
         var email = $("#email").val();
         var funct = $("#function").val();
 
-        $("#msg").hide(); // Hidden message
-       
         $.ajax({
             url: "/user/edit",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id, name: name, email: email, funct: funct},
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
                     
-                if(1) {
+                if(data) {
                     $("#success").show();
+                    $(".save").hide();
                 }
             });
+    });
+
+    // close modal
+    $(document).on('click', '.close', function(e) {
+        $(".save").show();
     });
 
