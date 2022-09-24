@@ -30,6 +30,8 @@ require __DIR__.'/auth.php';
 
 // User
 Route::get('/users', [UserController::class, 'index'])->name('users');
+Route::get('/users/form', [UserController::class, 'formUser'])->name('formUser');
+
 Route::get('/user/list', [UserController::class, 'getList'])->name('getListUser');
 Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
 Route::post('/user', [UserController::class, 'store'])->name('postUser');

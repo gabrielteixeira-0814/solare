@@ -18,6 +18,11 @@ class UserController extends Controller
     {
         return view('users');
     }
+
+    public function formUser()
+    {
+        return view('form.userFormModal')->render();
+    }
     
     public function getList(Request $request)
     {

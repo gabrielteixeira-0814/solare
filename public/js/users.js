@@ -1,3 +1,5 @@
+
+// Headers start
 document.addEventListener("DOMContentLoaded", function(event) {
 
     const showNavbar = (toggleId, navId, bodyId, headerId) =>{
@@ -36,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Your code to run since DOM is loaded and ready
     });
+
+    // Headers start end
 
 
     /*** Table Users ***/
@@ -82,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Show user
     $(document).on('click', '.edit', function(e) {
 
-        $("#success").hide(); //hide message
+        $("#successEdit").hide(); //hide message
         $(".modalGif").hide();
         $("#gif").show();
 
@@ -99,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
                         // Gif
                         $("#gif").hide();
+
                         $(".modalGif").show();
                         
                         $('#id').val(data.id)
@@ -113,6 +118,64 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
     // Edit user
+    $(document).on('click', '.saveEdit', function(e) {
+        $(".saveEdit").show();
+
+        var id = $("#id").val();
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var funct = $("#function").val();
+
+        $.ajax({
+            url: "/user/edit",
+            method: 'POST',
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {id: id, name: name, email: email, funct: funct},
+                }).done(function(data){
+                //console.log(data);
+                    
+                if(data) {
+                    $("#successEdit").show();
+                    $(".saveEdit").hide();
+                }
+            });
+    });
+
+    // close modal
+    $(document).on('click', '.closeEdit', function(e) {
+        $(".saveEdit").show();
+    });
+
+
+    // Return Form user
+    $(document).on('click', '.createUser', function(e) {
+
+        $("#success").hide(); //hide message
+        $(".modalFormGif").hide();
+        $("#gif").show();
+
+        $.ajax({
+            url: "/users/form",
+            method: 'GET',
+            data: '' 
+                }).done(function(data){
+                //console.log(data);
+                setTimeout(function() { 
+                    if(data) {
+                         // Gif
+                         $("#gif").hide();
+                        
+                         $(".modalFormGif").show();
+
+                        $('.form-user').html(data);
+                    }else {
+                        $('.form-user').html('<div class="">Error</div>');
+                    }
+                }, 1000);
+            });
+    });
+
+    // Create user
     $(document).on('click', '.save', function(e) {
         $(".save").show();
 
@@ -135,9 +198,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 }
             });
     });
-
-    // close modal
-    $(document).on('click', '.close', function(e) {
-        $(".save").show();
-    });
-
+       
+       
+   
