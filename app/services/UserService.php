@@ -36,17 +36,17 @@ class UserService
             'email' => 'required|email|unique:users',
             'password' => 'required|string|min:5|max:10|confirmed',
             'password_confirmation' => 'required|string|min:5|max:10',
-            'avatar' => 'image',
+            //'avatar' => 'image',
         ], $message);
 
          
-        if($request['avatar']) {
-            $file = $data['avatar'];
+        // if($request['avatar']) {
+        //     $file = $data['avatar'];
 
-            $nameFile = $file->getClientOriginalName();
-            $file = $file->storeAs('users', $nameFile);
-            $data['avatar'] = $file;
-        }
+        //     $nameFile = $file->getClientOriginalName();
+        //     $file = $file->storeAs('users', $nameFile);
+        //     $data['avatar'] = $file;
+        // }
         return $this->repo->store($data);
     }
 

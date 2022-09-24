@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             });
     });
 
-    // close modal
+    // close modal edit
     $(document).on('click', '.closeEdit', function(e) {
         $(".saveEdit").show();
     });
@@ -150,9 +150,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // Return Form user
     $(document).on('click', '.createUser', function(e) {
 
-        $("#success").hide(); //hide message
+        $("#successCreate").hide(); //hide message
         $(".modalFormGif").hide();
-        $("#gif").show();
+        $("#gifForm").show();
 
         $.ajax({
             url: "/users/form",
@@ -162,8 +162,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 //console.log(data);
                 setTimeout(function() { 
                     if(data) {
+
                          // Gif
-                         $("#gif").hide();
+                         $("#gifForm").hide();
                         
                          $(".modalFormGif").show();
 
@@ -171,32 +172,38 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     }else {
                         $('.form-user').html('<div class="">Error</div>');
                     }
-                }, 1000);
+                }, 500);
             });
     });
 
     // Create user
-    $(document).on('click', '.save', function(e) {
-        $(".save").show();
+    $(document).on('click', '.saveForm', function(e) {
+        $(".saveForm").show();
 
-        var id = $("#id").val();
         var name = $("#name").val();
         var email = $("#email").val();
         var funct = $("#function").val();
+        var password = $("#password").val();
+        var password_confirmation = $("#password_confirmation").val();
 
         $.ajax({
-            url: "/user/edit",
+            url: "/user",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id, name: name, email: email, funct: funct},
+            data: {name: name, email: email, password: password, password_confirmation: password_confirmation, funct: funct},
                 }).done(function(data){
-                //console.log(data);
+                console.log(data);
                     
                 if(data) {
-                    $("#success").show();
-                    $(".save").hide();
+                    $("#successCreate").show();
+                    $(".saveForm").hide();
                 }
             });
+    });
+
+     // close modal create
+     $(document).on('click', '.closeCreate', function(e) {
+        $(".saveForm").show();
     });
        
        
