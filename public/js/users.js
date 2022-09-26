@@ -138,7 +138,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     $("#successEdit").show();
                     $(".saveEdit").hide();
                 }
-            });
+            }).fail(function(error) {
+
+                // Message errors
+                console.log("error");
+                console.log(error.responseJSON.errors);
+
+                $.each(error.responseJSON.errors, function( k, v ) {
+                    $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
+                  });
+
+                  $( ".errorMsgEdit" ).fadeIn(300).delay(3000).fadeOut(300);
+
+                  setTimeout(function() { 
+                    $( ".errorMsgEdit" ).remove();
+                }, 4000);
+              }); 
     });
 
     // close modal edit
@@ -192,13 +207,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {name: name, email: email, password: password, password_confirmation: password_confirmation, funct: funct},
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
                     
                 if(data) {
                     $("#successCreate").show();
                     $(".saveForm").hide();
                 }
-            });
+            })
+            .fail(function(error) {
+
+                // Message errors
+                //console.log("error");
+                //console.log(error.responseJSON.errors);
+
+                $.each(error.responseJSON.errors, function( k, v ) {
+                    $('.msgError').append("<div class='alert alert-danger errorMsg' role='alert'>" + v + "</div>");
+                  });
+
+                  $( ".errorMsg" ).fadeIn(300).delay(3000).fadeOut(300);
+
+                  setTimeout(function() { 
+                    $( ".errorMsg" ).remove();
+                }, 4000);
+              });
     });
 
      // close modal create

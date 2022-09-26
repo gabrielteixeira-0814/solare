@@ -36,6 +36,13 @@
         </div>
       </div>
 
+      {{-- Error message --}}
+      <div class="row justify-content-center ">
+        <div class="col-10 mt-2">
+          <div class="msgError"></div>
+        </div>
+      </div>
+
       {{-- Gif --}}
       <div class="row justify-content-center mt-5" id="gifForm">
         <div class="col-1 text-center">
@@ -72,6 +79,14 @@
           </div>
         </div>
       </div>
+
+      {{-- Error message --}}
+      <div class="row justify-content-center ">
+        <div class="col-10 mt-2">
+          <div class="msgErrorEdit"></div>
+        </div>
+      </div>
+
 
       {{-- Gif --}}
       <div class="row justify-content-center mt-5" id="gif">
