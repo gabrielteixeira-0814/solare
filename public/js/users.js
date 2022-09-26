@@ -41,11 +41,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     // Headers start end
 
-
     /*** Table Users ***/
-    
+
     $(document).ready(function(){
         carregarTabelaUser(0);
+
+        $("#successDelete").hide(); // hide message success delete
+
     });
 
     $(document).on('click', '.paginationUser a', function(e) {
@@ -212,13 +214,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 if(data) {
                     $("#successCreate").show();
                     $(".saveForm").hide();
+
+                    carregarTabelaUser(0);
                 }
             })
             .fail(function(error) {
-
-                // Message errors
-                //console.log("error");
-                //console.log(error.responseJSON.errors);
 
                 $.each(error.responseJSON.errors, function( k, v ) {
                     $('.msgError').append("<div class='alert alert-danger errorMsg' role='alert'>" + v + "</div>");
@@ -237,5 +237,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $(".saveForm").show();
     });
        
+
+    // Show user
+    $(document).on('click', '.delete', function(e) {
+
+        var id = $(this).val();
+        $.ajax({
+            url: "/user/delete/"+ id + "",
+            method: 'GET',
+            data: "" 
+                }).done(function(data){
+
+                    if(data) {
+                        $("#successDelete").show();
+                        carregarTabelaUser(0);
+                        
+                        setTimeout(function() { 
+                            $("#successDelete").hide();
+                        }, 3000);
+
+                    }else {
+                        console.log('Error');
+                    }
+            });
+    });
        
    

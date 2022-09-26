@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repositories\UserRepositoryInterface;
 use Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -39,7 +40,8 @@ class UserService
             //'avatar' => 'image',
         ], $message);
 
-         
+        $data['password'] = Hash::make($request->password);
+      
         // if($request['avatar']) {
         //     $file = $data['avatar'];
 

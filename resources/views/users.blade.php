@@ -1,6 +1,13 @@
 @extends('layouts.layout')
 
 <div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-10 mt-5" id="successDelete">
+      <div class="alert alert-success text-center" role="alert">
+        Usuário deletado com sucesso!
+      </div>
+    </div>
+  </div>
   <div class="h2 pt-5" style="font-weight: bold; color: #0099B2">Usuários</div>
     <div class="row bg-white rounded px-3">
       <div class="col-6 py-4">
@@ -60,7 +67,6 @@
     </div>
   </div>
 </div>
-
 
 <!-- Modal Edit -->
 <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
