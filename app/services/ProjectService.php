@@ -14,6 +14,11 @@ class ProjectService
         $this->repo = $repo;
     }
 
+    public function getList()
+    {
+        $users = $this->repo->getList();     
+    }
+
     public function store($jsonData)
     {
         // Variáveis globais

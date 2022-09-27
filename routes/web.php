@@ -39,6 +39,7 @@ Route::post('/user/edit', [UserController::class, 'update'])->name('putUser');
 Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('deleteUser');
 
 // Project
+Route::get('/project/list', [ProjectController::class, 'getList'])->name('getListProject');
 Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');

@@ -9,6 +9,7 @@ interface ProjectRepositoryInterface
     public function __construct(Model $model);
     public function connectionApiMonday();
     public function store(array $data);
+    public function getList();
     public function getListGroup();
     public function get($id);
     public function update(array $data, $id);

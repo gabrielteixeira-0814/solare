@@ -13,6 +13,11 @@ class ProjectController extends Controller
     {
         $this->service = $service;
     }
+
+    public function getList()
+    {
+        return $this->service->getList();    
+    }
     
     public function getListGroup()
     {

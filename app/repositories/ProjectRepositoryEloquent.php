@@ -22,6 +22,11 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
        return $headers;
     }
 
+    public function getList()
+    {
+        return $this->model;
+    }
+
     public function store(array $data)
     {
        //
