@@ -93,12 +93,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $("#gif").show();
 
         var id = $(this).val();
+
+        console.log(id);
         $.ajax({
             url: "/user/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
-                //console.log(data);
+                console.log(data);
 
                 setTimeout(function() { 
                     if(data) {
@@ -139,6 +141,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
                 if(data) {
                     $("#successEdit").show();
                     $(".saveEdit").hide();
+
+                    carregarTabelaUser(0);
                 }
             }).fail(function(error) {
 
