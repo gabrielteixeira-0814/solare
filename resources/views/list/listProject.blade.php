@@ -4,10 +4,16 @@
             Nome
         </th>
         <th scope="col">
-            E-mail
+            Descrição
         </th>
         <th scope="col">
-            Função
+            Responsável
+        </th>
+        <th scope="col">
+            Cliente
+        </th>
+        <th scope="col">
+            Etapa do Projeto
         </th>
         <th scope="col">
             Data
@@ -17,30 +23,36 @@
         </th>
     </tr>
 
-    @foreach ($listUser as $user)
-        <tr>
+    @foreach ($listProject as $project)
+        <tr style="font-size: 13px">
             <td>
-                {{ $user->name }}
+                {{ $project->name }}
             </td>
             <td>
-                {{ $user->email }}
+                {{ $project->description }}
             </td>
             <td>
-                {{ $user->name }}
+                {{ $project->responsibleProject }}
             </td>
             <td>
-                {{ date("d/m/Y", strtotime($user->created_at)) }} 
+                {{ $project->nameClient }}
             </td>
             <td>
-                <button class='edit userButton' id='editUser' value="{{ $user->id }}" name="{{ $user->id }}" data-toggle="modal" data-target="#user" style="color: #0099B2; font-size: 16px;"><i class='bx bxs-edit-alt'></i></button>
-                <button class='delete userButton' id='deleteUser' value="{{ $user->id }}" name="{{ $user->id }}" style="color: #e93535; font-size: 16px;" ><i class='bx bxs-trash'></i></button>
+                {{ $project->nameStepsProject }}
+            </td>
+            <td>
+                {{ date("d/m/Y", strtotime($project->created_at)) }} 
+            </td>
+            <td>
+                <button class='edit userButton' id='editUser' value="{{ $project->id }}" name="{{ $project->id }}" data-toggle="modal" data-target="#user" style="color: #0099B2; font-size: 16px;"><i class='bx bxs-edit-alt'></i></button>
+                <button class='delete userButton' id='deleteUser' value="{{ $project->id }}" name="{{ $project->id }}" style="color: #e93535; font-size: 16px;" ><i class='bx bxs-trash'></i></button>
             </td>
         </tr>
     @endforeach
     </tr>
 </table>
 @if ($search)
-    <div class="paginationUser">
-        <p>{{ $listUser->links() }}</p>
+    <div class="paginationProject">
+        <p>{{ $listProject->links() }}</p>
     </div>
 @endif

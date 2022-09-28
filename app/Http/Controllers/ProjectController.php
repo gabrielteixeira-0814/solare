@@ -14,9 +14,14 @@ class ProjectController extends Controller
         $this->service = $service;
     }
 
-    public function getList()
+    public function getList(Request $request)
     {
-        return $this->service->getList();    
+        if($request->ajax()){
+
+            $search = !$request['search'] ? true : false;
+            $listProject = $this->service->getList($request);
+            return view('list.listProject', compact('listProject', 'search'))->render();
+        }
     }
     
     public function getListGroup()

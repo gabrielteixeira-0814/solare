@@ -24,7 +24,7 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 
     public function getList()
     {
-        return $this->model->all();
+        return $this->model;
     }
 
     public function store(array $data)

@@ -14,9 +14,19 @@ class ProjectService
         $this->repo = $repo;
     }
 
-    public function getList()
+    public function getList($request)
     { 
-        return $this->repo->getList(); 
+        if($request['search']){
+
+            $projects = $this->repo->getList();
+            $listProject = $projects->where('name', 'LIKE', '%'.$request['search'].'%')->get();
+            return $listProject;
+
+        }else {
+            $projects = $this->repo->getList();
+            $listProject = $projects->paginate(2);
+            return $listProject;
+        }
     }
 
     public function store($jsonData)
