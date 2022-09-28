@@ -288,10 +288,12 @@ class ProjectService
 
     public function delete($jsonData)
     {
-        
+
         // Variáveis globais
         $board_id = 3189733335; 
-        $tokenSystem = ""; 
+
+        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
+
         $headers = $this->repo->connectionApiMonday();
 
         // Buscar grupo
