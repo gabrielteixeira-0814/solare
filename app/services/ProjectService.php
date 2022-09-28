@@ -15,15 +15,18 @@ class ProjectService
     }
 
     public function getList()
-    {
-        $users = $this->repo->getList();     
+    { 
+        return $this->repo->getList(); 
     }
 
     public function store($jsonData)
     {
-        // Variáveis globais
+        // Array para salvar as informações no banco de dados
+        $createProjectData = [];
+        
+       // Variáveis globais
        $board_id = 3189733335; 
-       $tokenSystem = ""; 
+       $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
        $headers = $this->repo->connectionApiMonday();
        $groups = $this->getListGroup();
         
@@ -145,8 +148,21 @@ class ProjectService
                
                $json = json_decode($data, true);
 
-               return "Projeto criado com sucesso!";
+               if($json['data']['create_item']['id']) {
+                    $createProjectData = [
+                        'project' => $jsonData['projeto'],
+                        'identifier' => $jsonData['identificador'],
+                        'name' => $jsonData['nome'],
+                        'description' => $jsonData['descricao'],
+                        'FunnelsProjectnames' => $jsonData['nomesFunisProjeto'],
+                        'nameStepsProject' => $jsonData['nomeEtapasProjeto'],
+                        'responsibleProject' => $jsonData['nomeResponsavelProjeto'],
+                        'nameRepresentativeProject' => $jsonData['nomeRepresentanteProjeto'],
+                        'nameClient' => $jsonData['nomeCliente'],
+                    ];
 
+                    return $this->repo->store($createProjectData);
+               }
            }else {
 
                 // Corre tipo de dados a ser inserido na coluna
@@ -230,8 +246,23 @@ class ProjectService
                ]));
                
                $json = json_decode($data, true);
+               
+               if($json['data']['create_item']['id']) {
+                    $createProjectData = [
+                        'project' => $jsonData['projeto'],
+                        'identifier' => $jsonData['identificador'],
+                        'name' => $jsonData['nome'],
+                        'description' => $jsonData['descricao'],
+                        'FunnelsProjectnames' => $jsonData['nomesFunisProjeto'],
+                        'nameStepsProject' => $jsonData['nomeEtapasProjeto'],
+                        'responsibleProject' => $jsonData['nomeResponsavelProjeto'],
+                        'nameRepresentativeProject' => $jsonData['nomeRepresentanteProjeto'],
+                        'nameClient' => $jsonData['nomeCliente'],
+                    ];
 
-               return "Criando projeto com sucess";
+                    return $this->repo->store($createProjectData);
+                }
+           
            }
 
        }else {
@@ -338,7 +369,7 @@ class ProjectService
     public function getListGroup()
     {
        /** Conexão com api monday**/
-       $token = '';
+       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
 
 
        $apiUrl = 'https://api.monday.com/v2';
@@ -378,7 +409,7 @@ class ProjectService
        $board_id = 3189733335; 
 
        /** Conexão com api monday**/
-       $token = '';
+       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
 
 
        $apiUrl = 'https://api.monday.com/v2';

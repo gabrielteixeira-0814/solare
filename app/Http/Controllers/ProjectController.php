@@ -34,7 +34,7 @@ class ProjectController extends Controller
        // Recebe webhook
        $json = file_get_contents('php://input');
        $jsonData = json_decode($json, true);
-
+       
        return $this->service->store($jsonData);
     }
 
