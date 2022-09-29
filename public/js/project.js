@@ -32,7 +32,7 @@ function carregarTabelaProject(pagina) {
     method: 'GET',
     data: {search: search} 
         }).done(function(data){
-        console.log(data);
+        //console.log(data);
         
         setTimeout(function() { 
             if(data) {
@@ -43,3 +43,53 @@ function carregarTabelaProject(pagina) {
         }, 1000);
     });
 }
+
+const formatar = (data) => {
+
+    var tempDate = new Date(data);
+    var date = tempDate.getDate() + 1;
+
+    const ano = data.getFullYear();
+    const mes = (`00${data.getMonth() + 1}`).slice(-2);
+    const dia = (`00${date}`).slice(-2);
+  
+    return `${dia}/${mes}/${ano}`;
+  };
+  
+// Show user
+$(document).on('click', '.viewProject', function(e) {
+
+    $(".modalGif").hide();
+    $("#gif").show();
+
+    var id = $(this).val();
+  
+    $.ajax({
+        url: "/project/"+ id + "",
+        method: 'GET',
+        data: "" 
+            }).done(function(data){
+            // console.log(data);
+
+            setTimeout(function() { 
+                if(data) {
+
+                    // Gif
+                    $("#gif").hide();
+
+                    $(".modalGif").show();
+
+                    $('#identifier').val(data.identifier);
+                    $('#project').val(data.project);
+                    $('#name').val(data.FunnelsProjectnames);
+                    $('#description').val(data.description);
+                    $('#responsible').val(data.responsibleProject);
+                    $('#client').val(data.nameClient);
+                    $('#projectStage').val(data.nameStepsProject);
+                    $('#date').val(formatar(new Date(data.created_at)));
+                }else {
+                    console.log('Error');
+                }
+            }, 1000);
+        });
+});

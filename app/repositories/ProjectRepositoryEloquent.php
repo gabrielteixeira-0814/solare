@@ -44,7 +44,7 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 
     public function get($id)
     {
-        //
+        return $this->model->findOrFail($id);
     }
 
     public function update(array $data, $id)

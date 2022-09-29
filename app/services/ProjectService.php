@@ -29,6 +29,11 @@ class ProjectService
         }
     }
 
+    public function get($id)
+    {
+        return $this->repo->get($id);
+    }
+
     public function store($jsonData)
     {
         // Array para salvar as informações no banco de dados

@@ -40,6 +40,7 @@ Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('delete
 
 // Project
 Route::get('/project/list', [ProjectController::class, 'getList'])->name('getListProject');
+Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
 Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');

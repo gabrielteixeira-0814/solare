@@ -44,7 +44,7 @@
                 {{ date("d/m/Y", strtotime($project->created_at)) }} 
             </td>
             <td>
-                <button class='view userButton' id='view' value="{{ $project->id }}" name="{{ $project->id }}" data-bs-toggle="modal" data-bs-target="#viewProject" style="color: #0099B2; font-size: 20px;"><i class='bx bx-show'></i></button>
+                <button class='viewProject userButton' id='view' value="{{ $project->id }}" name="{{ $project->id }}" data-bs-toggle="modal" data-bs-target="#viewProject" style="color: #0099B2; font-size: 20px;"><i class='bx bx-show'></i></button>
             </td>
         </tr>
     @endforeach

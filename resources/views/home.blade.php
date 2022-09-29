@@ -27,7 +27,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="viewProjectLabel" style="font-weight: bold; color: #0099B2">Projetoaa</h5>
+        <h5 class="modal-title" id="viewProjectLabel" style="font-weight: bold; color: #0099B2">Projeto</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -41,30 +41,37 @@
         
         <div class="modal-body modalGif">
             <form action="" class="form" id="form">
-                <input type="hidden" class="" id="id" name="id">
+                <div class="mb-3">
+                  <label for="identifier" class="form-label">Identificador</label>
+                  <input type="text" disabled class="form-control" id="identifier" name="identifier" aria-describedby="identifier">
+                </div>
+                <div class="mb-3">
+                  <label for="project" class="form-label">Projeto</label>
+                  <input type="text" disabled class="form-control" id="project" name="project" aria-describedby="project">
+                </div>
                 <div class="mb-3">
                   <label for="name" class="form-label">Nome</label>
-                  <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+                  <input type="text" disabled class="form-control" id="name" name="name" aria-describedby="name">
                 </div>
                 <div class="mb-3">
-                  <label for="descricao" class="form-label">Descrição</label>
-                  <input type="text" class="form-control" id="descricao" name="descricao">
+                  <label for="description" class="form-label">Descrição</label>
+                  <input type="text" disabled class="form-control" id="description" name="description">
                 </div>
                 <div class="mb-3">
-                    <label for="responsavel" class="form-label">Responsável</label>
-                    <input type="text" class="form-control" id="responsavel" name="responsavel">
+                    <label for="responsible" class="form-label">Responsável</label>
+                    <input type="text" disabled class="form-control" id="responsible" name="responsible">
                 </div>
                 <div class="mb-3">
-                  <label for="cliente" class="form-label">Cliente</label>
-                  <input type="text" class="form-control" id="cliente" name="cliente">
+                  <label for="client" class="form-label">Cliente</label>
+                  <input type="text" disabled class="form-control" id="client" name="client">
                 </div>
                 <div class="mb-3">
-                  <label for="etapaProjeto" class="form-label">Etapa do Projeto</label>
-                  <input type="text" class="form-control" id="etapaProjeto" name="etapaProjeto">
+                  <label for="projectStage" class="form-label">Etapa do Projeto</label>
+                  <input type="text" disabled class="form-control" id="projectStage" name="projectStage">
                 </div>
                 <div class="mb-3">
-                  <label for="data" class="form-label">Data</label>
-                  <input type="text" class="form-control" id="data" name="data">
+                  <label for="date" class="form-label">Data</label>
+                  <input type="text" disabled class="form-control" id="date" name="date">
                 </div>
             </form>
         </div>
