@@ -25,7 +25,7 @@
 </div>
 
 
-<!-- Modal form  -->
+<!-- Modal form Users -->
 <div class="modal fade" id="userForm" tabindex="-1" role="dialog" aria-labelledby="modalFomrUser" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
