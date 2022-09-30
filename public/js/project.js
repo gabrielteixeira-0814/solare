@@ -44,6 +44,7 @@ function carregarTabelaProject(pagina) {
     });
 }
 
+// Format date
 const formatar = (data) => {
 
     var tempDate = new Date(data);
@@ -80,7 +81,7 @@ $(document).on('click', '.viewProject', function(e) {
                     $(".modalGif").show();
 
                     $('#identifier').val(data.identifier);
-                    $('#project').val(data.project);
+                    $('.project').html(data.project);
                     $('#name').val(data.FunnelsProjectnames);
                     $('#description').val(data.description);
                     $('#responsible').val(data.responsibleProject);

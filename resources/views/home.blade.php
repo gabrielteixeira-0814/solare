@@ -27,7 +27,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="viewProjectLabel" style="font-weight: bold; color: #0099B2">Projeto</h5>
+        <h5 class="modal-title" id="viewProjectLabel" style="font-weight: bold; color: #0099B2">Projeto - <span class="project"></span></h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -44,10 +44,6 @@
                 <div class="mb-3">
                   <label for="identifier" class="form-label">Identificador</label>
                   <input type="text" disabled class="form-control" id="identifier" name="identifier" aria-describedby="identifier">
-                </div>
-                <div class="mb-3">
-                  <label for="project" class="form-label">Projeto</label>
-                  <input type="text" disabled class="form-control" id="project" name="project" aria-describedby="project">
                 </div>
                 <div class="mb-3">
                   <label for="name" class="form-label">Nome</label>

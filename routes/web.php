@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\SettingController; 
 use App\Http\Controllers\AuthController; 
 use App\Http\Controllers\ProjectController;  
 use App\Http\Controllers\ProductController; 
@@ -45,9 +46,17 @@ Route::post('create', [ProjectController::class, 'store'])->name('create');
 Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
 
+// Setting
+Route::get('/setting', [SettingController::class, 'index'])->name('pageSetting');
+Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
+// Route::get('/setting/list', [ProjectController::class, 'getList'])->name('getListProject');
+// Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
+// Route::post('create', [ProjectController::class, 'store'])->name('create');
+// Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
+// Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
+
 // Home
 //Route::get('/', [HomeController::class, 'home'])->name('home');
-
 
 
 
