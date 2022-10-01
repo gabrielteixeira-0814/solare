@@ -9,7 +9,9 @@
     </div>
   </div>
   <div class="h2 pt-5" style="font-weight: bold; color: #0099B2">Configurações</div>
-    <div class="row bg-white rounded px-3">
+
+    <div class="row bg-white rounded p-3">
+      
         {{-- Insere a formulario --}}
         <div class="setting_data"></div>
     </div>

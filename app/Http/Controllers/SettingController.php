@@ -24,14 +24,14 @@ class SettingController extends Controller
         return view('form.settingForm');
     }
 
-    public function getList(Request $request)
+    public function getList()
     {
-        if($request->ajax()){
-
-            $search = !$request['search'] ? true : false;
-            $listUser = $this->service->getList($request);
-            return view('list.listUser', compact('listUser', 'search'))->render();
-        }
+        return $this->service->getList();
+    }
+    
+    public function getListGroup()
+    {
+        return $this->service->getListGroup();
     }
     
     public function get($id)
@@ -39,20 +39,26 @@ class SettingController extends Controller
         return $this->service->get($id);
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        return $this->service->store($request);
+       // Recebe webhook
+       $json = file_get_contents('php://input');
+       $jsonData = json_decode($json, true);
+       
+       return $this->service->store($jsonData);
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        if($request->ajax()){
-            return $this->service->update($request);
-        }
+        return $this->service->update($request, $id);
     }
 
-    public function delete($id)
+    public function delete()
     {
-        return $this->service->destroy($id);
+        // Recebe webhook
+        $json = file_get_contents('php://input');
+        $jsonData = json_decode($json, true);
+
+        return $this->service->delete($jsonData);
     }
 }

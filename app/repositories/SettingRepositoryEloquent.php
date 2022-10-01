@@ -20,7 +20,7 @@ class SettingRepositoryEloquent implements SettingRepositoryInterface
 
     public function getList()
     {
-        return $this->model;
+        return $this->model->all();
     }
 
     public function get($id)
