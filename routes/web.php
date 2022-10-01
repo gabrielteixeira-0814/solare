@@ -50,6 +50,7 @@ Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
 Route::get('/setting', [SettingController::class, 'index'])->name('pageSetting');
 Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
 Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
+Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
 // Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
 // Route::post('create', [ProjectController::class, 'store'])->name('create');
 // Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');

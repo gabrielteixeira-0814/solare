@@ -43,9 +43,12 @@
                 //console.log(data);
                 if(data) {
                     setTimeout(function() { 
-                        $('#boards').val(data.boards)
-                        $('#company').val(data.company)
-                        $('#monday').val(data.monday)
+                        $('#idBoards').val(data.boards.id);
+                        $('#boards').val(data.boards.token);
+                        $('idCompany').val(data.company.id);
+                        $('#company').val(data.company.token);
+                        $('#idMonday').val(data.monday.id);
+                        $('#monday').val(data.monday.token);
                 }, 1000);
                     
                 }else {
@@ -54,63 +57,28 @@
             });
     }
 
-    $(document).on('click', '.edit', function(e) {
 
-        $("#successEdit").hide(); //hide message
-        $(".modalGif").hide();
-        $("#gif").show();
+    // Edit board
+    $(document).on('click', '.SettingFormBoards', function(e) {
+        //$(".saveEdit").show();
 
-        var id = $(this).val();
-
-        console.log(id);
-        $.ajax({
-            url: "/user/"+ id + "",
-            method: 'GET',
-            data: "" 
-                }).done(function(data){
-                console.log(data);
-
-                setTimeout(function() { 
-                    if(data) {
-
-                        // Gif
-                        $("#gif").hide();
-
-                        $(".modalGif").show();
-                        
-                        $('#id').val(data.id)
-                        $('#name').val(data.name)
-                        $('#email').val(data.email)
-                        $('#function').val(data.name)
-                    }else {
-                        console.log('Error');
-                    }
-                }, 1000);
-            });
-    });
-
-    // Edit user
-    $(document).on('click', '.saveEdit', function(e) {
-        $(".saveEdit").show();
-
-        var id = $("#id").val();
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var funct = $("#function").val();
+        var id = $('#idBoards').val();
+        var token = $('#boards').val();
 
         $.ajax({
-            url: "/user/edit",
+            url: "/setting/edit/board",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id, name: name, email: email, funct: funct},
+            data: {id: id, token: token},
                 }).done(function(data){
                 //console.log(data);
                     
                 if(data) {
-                    $("#successEdit").show();
-                    $(".saveEdit").hide();
+                    console.log(data);
+                    //$("#successEdit").show();
+                    //$(".saveEdit").hide();
 
-                    carregarTabelaUser(0);
+                    //carregarTabelaUser(0);
                 }
             }).fail(function(error) {
 
@@ -118,15 +86,15 @@
                 console.log("error");
                 console.log(error.responseJSON.errors);
 
-                $.each(error.responseJSON.errors, function( k, v ) {
-                    $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
-                  });
+                // $.each(error.responseJSON.errors, function( k, v ) {
+                //     $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
+                //   });
 
-                  $( ".errorMsgEdit" ).fadeIn(300).delay(3000).fadeOut(300);
+                //   $( ".errorMsgEdit" ).fadeIn(300).delay(3000).fadeOut(300);
 
-                  setTimeout(function() { 
-                    $( ".errorMsgEdit" ).remove();
-                }, 4000);
+                //   setTimeout(function() { 
+                //     $( ".errorMsgEdit" ).remove();
+                // }, 4000);
               }); 
     });
 

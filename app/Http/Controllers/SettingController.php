@@ -21,12 +21,21 @@ class SettingController extends Controller
 
     public function getList()
     {
-        return $this->service->getList();
+        return $this->service->getList();  
     }
 
     public function formSetting()
     {
         return view('form.settingForm');
+    }
+
+    public function editBoard(Request $request)
+    {
+        if($request->ajax()){
+            return $this->service->editBoard($request);
+        }
+        
+       
     }
 
     public function getListGroup()
@@ -48,9 +57,11 @@ class SettingController extends Controller
        return $this->service->store($jsonData);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        return $this->service->update($request, $id);
+        if($request->ajax()){
+            return $this->service->update($request);
+        }
     }
 
     public function delete()

@@ -57,20 +57,37 @@ class SettingService
 
         foreach ($data as $item) {
             if($item->type == "boards"){
-                $boards = $item->token;
+                $boards = ['id' => $item->id, 'token' => $item->token];
             }
 
             if($item->type == "monday"){
-                $monday = $item->token;
+                $monday = ['id' => $item->id, 'token' => $item->token];
             }
 
             if($item->type == "company"){
-                $company = $item->token;
+                $company = ['id' => $item->id, 'token' => $item->token];
             }
         }
         $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
         return $list;
     }
+
+    // public function editBoard()
+    // {
+    //     $data = $this->repo->getList();
+
+    //     foreach ($data as $item) {
+    //         if($item->type == "boards"){
+    //             $boards = $item->token;
+    //         }
+    //     }
+        
+    //     return $this->repo->update($data);
+    // }
+    
+
+
+
 
     public function get($id)
     {
@@ -79,6 +96,11 @@ class SettingService
 
     public function update($request)
     {
+        $data = [
+            "id" => $request['id'],
+            "token" => $request['token']
+        ];
+        
         return $this->repo->update($data);
     }
 
