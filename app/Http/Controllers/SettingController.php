@@ -19,16 +19,16 @@ class SettingController extends Controller
         return view('setting');
     }
 
+    public function getList()
+    {
+        return $this->service->getList();
+    }
+
     public function formSetting()
     {
         return view('form.settingForm');
     }
 
-    public function getList()
-    {
-        return $this->service->getList();
-    }
-    
     public function getListGroup()
     {
         return $this->service->getListGroup();

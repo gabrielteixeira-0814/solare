@@ -53,7 +53,23 @@ class SettingService
 
     public function getList()
     {
-        return $this->repo->getList();
+        $data = $this->repo->getList();
+
+        foreach ($data as $item) {
+            if($item->type == "boards"){
+                $boards = $item->token;
+            }
+
+            if($item->type == "monday"){
+                $monday = $item->token;
+            }
+
+            if($item->type == "company"){
+                $company = $item->token;
+            }
+        }
+        $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
+        return $list;
     }
 
     public function get($id)

@@ -3,6 +3,7 @@
 
     $(document).ready(function(){
         carregarFormSetting();
+        carregarValueForm();
 
         //$("#successDelete").hide(); // hide message success delete
 
@@ -19,7 +20,7 @@
         method: 'GET',
         data: '' 
             }).done(function(data){
-            // console.log(data);
+            //console.log(data);
             
             setTimeout(function() { 
                 if(data) {
@@ -27,11 +28,32 @@
                 }else {
                     $('.setting_data').html('<div class="">Error</div>');
                 }
-            }, 1000);
+            }, 500);
         });
     }
 
-    // Show user
+    // Show Setting
+
+    function carregarValueForm() {
+        $.ajax({
+            url: "/setting/list",
+            method: 'GET',
+            data: '' 
+                }).done(function(data){
+                //console.log(data);
+                if(data) {
+                    setTimeout(function() { 
+                        $('#boards').val(data.boards)
+                        $('#company').val(data.company)
+                        $('#monday').val(data.monday)
+                }, 1000);
+                    
+                }else {
+                    console.log('Error');
+                }
+            });
+    }
+
     $(document).on('click', '.edit', function(e) {
 
         $("#successEdit").hide(); //hide message
