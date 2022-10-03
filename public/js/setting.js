@@ -5,8 +5,7 @@
         carregarFormSetting();
         carregarValueForm();
 
-        //$("#successDelete").hide(); // hide message success delete
-
+        $("#successEditToken").hide();
     });
    
     // Search user
@@ -60,7 +59,9 @@
 
     // Edit board
     $(document).on('click', '.SettingFormBoards', function(e) {
-        //$(".saveEdit").show();
+
+        $(".SettingFormBoards").hide();
+        $('.SettingFormBoardsLoading').append("<button type='button' class='btn btn-success addSettingFormBoardsLoading' id='#SettingFormBoardsLoading'>Atualizar...</button>");
 
         var id = $('#idBoards').val();
         var token = $('#boards').val();
@@ -71,30 +72,32 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id, token: token},
                 }).done(function(data){
-                //console.log(data);
-                    
-                if(data) {
-                    console.log(data);
-                    //$("#successEdit").show();
-                    //$(".saveEdit").hide();
 
-                    //carregarTabelaUser(0);
+                if(data) {
+                    setTimeout(function() { 
+                        console.log(data);
+                        carregarValueForm(0);
+                        $( "#successEditToken" ).fadeIn(300).delay(3000).fadeOut(300);
+                        $( ".addSettingFormBoardsLoading" ).remove();
+                        $(".SettingFormBoards").show();
+                    }, 1000);
+
                 }
             }).fail(function(error) {
-
                 // Message errors
-                console.log("error");
-                console.log(error.responseJSON.errors);
+                $.each(error.responseJSON.errors, function( k, v ) {
+                    $('.msgError').append("<div class='alert alert-danger errorMsg' role='alert'>" + v + "</div>");
+                  });
 
-                // $.each(error.responseJSON.errors, function( k, v ) {
-                //     $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
-                //   });
+                  $( ".errorMsg" ).fadeIn(300).delay(3000).fadeOut(300);
+                  
+                  carregarValueForm(0);
 
-                //   $( ".errorMsgEdit" ).fadeIn(300).delay(3000).fadeOut(300);
-
-                //   setTimeout(function() { 
-                //     $( ".errorMsgEdit" ).remove();
-                // }, 4000);
+                  setTimeout(function() { 
+                    $( ".errorMsg" ).remove();
+                    $( ".addSettingFormBoardsLoading" ).remove();
+                    $(".SettingFormBoards").show();
+                }, 3000);
               }); 
     });
 

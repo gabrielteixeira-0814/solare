@@ -8,6 +8,7 @@
     <input type="text" class="d-inline form-control" id="boards" name="boards"  value=""aria-describedby="boards" placeholder="Ex: 1055733332">
   </div>
   <div class="col-md-2 d-flex align-items-end">
+    <div class="SettingFormBoardsLoading"></div>
       <button type="button" class="btn btn-success SettingFormBoards" id="#SettingFormBoards" >Atualizar</button>
   </div>
 </div>

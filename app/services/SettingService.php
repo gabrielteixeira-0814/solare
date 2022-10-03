@@ -72,23 +72,6 @@ class SettingService
         return $list;
     }
 
-    // public function editBoard()
-    // {
-    //     $data = $this->repo->getList();
-
-    //     foreach ($data as $item) {
-    //         if($item->type == "boards"){
-    //             $boards = $item->token;
-    //         }
-    //     }
-        
-    //     return $this->repo->update($data);
-    // }
-    
-
-
-
-
     public function get($id)
     {
         return $this->repo->get($id);
@@ -96,9 +79,42 @@ class SettingService
 
     public function update($request)
     {
+        switch ($request['id']) {
+            case 1:
+                $tokenMin = '10';
+                $tokenMax = '20';
+                $type = 'numeric';
+                break;
+            case 2:
+                $tokenMin = '2';
+                $tokenMax = '200';
+                $type = 'string';
+                break;
+            case 3:
+                $tokenMin = '2';
+                $tokenMax = '200';
+                $type = 'string';
+                break;
+        }
+        $typeWriting = $type != 'numeric' ? 'Letra' : 'Número';
+
+        $message = [
+            'id.required' => 'O id é obrigatório!',
+
+            'token.min' => "É necessário no mínimo $tokenMin caracteres no token da configuração!",
+            'token.max' => "Apenas no Máximo $tokenMax caracteres no token da configuração!",
+            "token.$type" => "O token deve ser um $typeWriting.",
+        ];
+
+        $data = $request->validate([
+            // 'id' => 'required|numeric|min:5|max:255',
+            'id' => 'required',
+            'token' => "required|$type|min:10|max:50",
+        ], $message);
+
         $data = [
-            "id" => $request['id'],
-            "token" => $request['token']
+            "id" => $data['id'],
+            "token" => $data['token']
         ];
         
         return $this->repo->update($data);
