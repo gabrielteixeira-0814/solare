@@ -82,20 +82,21 @@ class SettingService
         switch ($request['id']) {
             case 1:
                 $tokenMin = '10';
-                $tokenMax = '20';
+                $tokenMax = '100000000000';
                 $type = 'numeric';
                 break;
             case 2:
-                $tokenMin = '2';
-                $tokenMax = '200';
+                $tokenMin = '10';
+                $tokenMax = '255';
                 $type = 'string';
                 break;
             case 3:
-                $tokenMin = '2';
-                $tokenMax = '200';
+                $tokenMin = '100';
+                $tokenMax = '500';
                 $type = 'string';
                 break;
         }
+
         $typeWriting = $type != 'numeric' ? 'Letra' : 'Número';
 
         $message = [
@@ -107,9 +108,8 @@ class SettingService
         ];
 
         $data = $request->validate([
-            // 'id' => 'required|numeric|min:5|max:255',
             'id' => 'required',
-            'token' => "required|$type|min:10|max:50",
+            'token' => "required|$type|min:$tokenMin|max:$tokenMax",
         ], $message);
 
         $data = [

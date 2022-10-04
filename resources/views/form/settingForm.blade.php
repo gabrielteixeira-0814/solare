@@ -9,7 +9,7 @@
   </div>
   <div class="col-md-2 d-flex align-items-end">
     <div class="SettingFormBoardsLoading"></div>
-      <button type="button" class="btn btn-success SettingFormBoards" id="#SettingFormBoards" >Atualizar</button>
+      <button type="button" class="btn btn-success SettingForm SettingFormBoards" id="#SettingFormBoards" value="1">Atualizar</button>
   </div>
 </div>
 
@@ -20,7 +20,8 @@
     <input type="text" class="d-inline form-control" id="company" name="settingSystem" value="" aria-describedby="settingSystem" placeholder="Ex: 1a6322d9-6881-4cac-ad39-811e7c6c1511">
   </div>
   <div class="col-md-2 d-flex align-items-end">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#userForm" >Atualizar</button>
+    <div class="SettingFormCompanyLoading"></div>
+    <button type="button" class="btn btn-success SettingForm SettingFormCompany" id="#SettingFormCompany" value="2" >Atualizar</button>
   </div>
 </div>
 <div class="row d-flex justify-content-center mb-5">
@@ -30,7 +31,8 @@
     <input type="text" class="d-inline form-control" id="monday" name="settingMonday" value="" aria-describedby="settingMonday" placeholder="Ex: 1a6322d9-6881-4cac-ad39-811e7c6c1511">
   </div>
   <div class="col-md-2 d-flex align-items-end">
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target="#userForm" >Atualizar</button>
+    <div class="SettingFormMondayLoading"></div>
+    <button type="button" class="btn btn-success SettingForm SettingFormMonday" id="#SettingFormMonday" value="3" >Atualizar</button>
   </div>
 </div>
 

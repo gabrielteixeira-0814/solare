@@ -58,14 +58,30 @@
 
 
     // Edit board
-    $(document).on('click', '.SettingFormBoards', function(e) {
+    $(document).on('click', '.SettingForm', function(e) {
 
-        $(".SettingFormBoards").hide();
-        $('.SettingFormBoardsLoading').append("<button type='button' class='btn btn-success addSettingFormBoardsLoading' id='#SettingFormBoardsLoading'>Atualizar...</button>");
+        var id = $(this).val();
 
-        var id = $('#idBoards').val();
-        var token = $('#boards').val();
-
+          switch(id) {
+            case '1':
+                var token = $('#boards').val();
+                $(".SettingFormBoards").hide();
+                $('.SettingFormBoardsLoading').append("<button type='button' class='btn btn-success addSettingFormBoardsLoading' id='#SettingFormBoardsLoading'>Atualizar...</button>");
+              break;
+            case '2':
+                var token = $('#company').val();
+                $(".SettingFormCompany").hide();
+                $('.SettingFormCompanyLoading').append("<button type='button' class='btn btn-success addSettingFormBoardsLoading' id='#SettingFormCompanyLoading'>Atualizar...</button>");
+              break;
+              case '3':
+                var token = $('#monday').val();
+                $(".SettingFormMonday").hide();
+                $('.SettingFormMondayLoading').append("<button type='button' class='btn btn-success addSettingFormBoardsLoading' id='#SettingFormMondayLoading'>Atualizar...</button>");
+              break;
+            default:
+              // 
+          }
+       
         $.ajax({
             url: "/setting/edit/board",
             method: 'POST',
@@ -75,31 +91,40 @@
 
                 if(data) {
                     setTimeout(function() { 
-                        console.log(data);
+                        //console.log(data);
                         carregarValueForm(0);
                         $( "#successEditToken" ).fadeIn(300).delay(3000).fadeOut(300);
                         $( ".addSettingFormBoardsLoading" ).remove();
+                        $( ".addSettingFormCompanyLoading" ).remove();
+                        $( ".addSettingFormMondayLoading" ).remove();
                         $(".SettingFormBoards").show();
+                        $(".SettingFormCompany").show();
+                        $(".SettingFormMonday").show();
                     }, 1000);
 
                 }
             }).fail(function(error) {
                 // Message errors
                 $.each(error.responseJSON.errors, function( k, v ) {
-                    $('.msgError').append("<div class='alert alert-danger errorMsg' role='alert'>" + v + "</div>");
+                    $('.msgError').append("<div class='text-center alert alert-danger errorMsg' role='alert'>" + v + "</div>");
                   });
 
                   $( ".errorMsg" ).fadeIn(300).delay(3000).fadeOut(300);
-                  
+
                   carregarValueForm(0);
 
                   setTimeout(function() { 
                     $( ".errorMsg" ).remove();
                     $( ".addSettingFormBoardsLoading" ).remove();
+                    $( ".addSettingFormCompanyLoading" ).remove();
+                    $( ".addSettingFormMondayLoading" ).remove();
                     $(".SettingFormBoards").show();
+                    $(".SettingFormCompany").show();
+                    $(".SettingFormMonday").show();
                 }, 3000);
               }); 
-    });
+        });
+        
 
 
 
