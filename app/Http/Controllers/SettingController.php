@@ -34,8 +34,6 @@ class SettingController extends Controller
         if($request->ajax()){
             return $this->service->editBoard($request);
         }
-        
-       
     }
 
     public function getListGroup()

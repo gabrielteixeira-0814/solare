@@ -49,7 +49,7 @@
                         <a href="{{ route('pageSetting')}}" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
                             <span class="nav_name">Funções</span>
                         </a>
-                        <a href="" class="nav_link"><i class='bx bx-cog nav_icon'></i>
+                        <a href="{{ route('pageSetting')}}" class="nav_link"><i class='bx bx-cog nav_icon'></i>
                             <span class="nav_name">Configurações</span>
                         </a>
                     </div>

@@ -32,7 +32,6 @@
     }
 
     // Show Setting
-
     function carregarValueForm() {
         $.ajax({
             url: "/setting/list",

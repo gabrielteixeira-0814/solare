@@ -69,10 +69,10 @@
 
                         $(".modalGif").show();
                         
-                        $('#id').val(data.id)
-                        $('#name').val(data.name)
-                        $('#email').val(data.email)
-                        $('#function').val(data.name)
+                        $('.id').val(data.id)
+                        $('.name').val(data.name)
+                        $('.email').val(data.email)
+                        $('.function').val(data.name)
                     }else {
                         console.log('Error');
                     }
