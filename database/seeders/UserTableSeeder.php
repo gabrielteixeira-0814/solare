@@ -23,6 +23,6 @@ class UserTableSeeder extends Seeder
             'avatar' => 'image.png',
             'password' => bcrypt('123456'), // password
             'remember_token' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        ]); //->roles()->attach([1,2]); // ->roles()->attach([1,2]); Insere as funções
+        ]); //->roles()->attach(1); // ->roles()->attach([1,2]); Insere as funções
     }
 }

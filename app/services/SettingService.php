@@ -55,21 +55,21 @@ class SettingService
     {
         $data = $this->repo->getList();
 
-        foreach ($data as $item) {
-            if($item->type == "boards"){
-                $boards = ['id' => $item->id, 'token' => $item->token];
-            }
+        // foreach ($data as $item) {
+        //     if($item->type == "boards"){
+        //         $boards = ['id' => $item->id, 'token' => $item->token];
+        //     }
 
-            if($item->type == "monday"){
-                $monday = ['id' => $item->id, 'token' => $item->token];
-            }
+        //     if($item->type == "monday"){
+        //         $monday = ['id' => $item->id, 'token' => $item->token];
+        //     }
 
-            if($item->type == "company"){
-                $company = ['id' => $item->id, 'token' => $item->token];
-            }
-        }
-        $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
-        return $list;
+        //     if($item->type == "company"){
+        //         $company = ['id' => $item->id, 'token' => $item->token];
+        //     }
+        // }
+        // $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
+        return $data;
     }
 
     public function get($id)
