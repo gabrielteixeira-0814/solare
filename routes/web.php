@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProjectController;  
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\HomeController; 
+use App\Http\Controllers\Acl\RoleController; 
+use App\Http\Controllers\Acl\PermissionController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +53,14 @@ Route::get('/setting', [SettingController::class, 'index'])->name('pageSetting')
 Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
 Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
 Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
+
+// Roles / Permissions
+Route::get('/role', [RoleController::class, 'index'])->name('pageRole');
+Route::get('/role/list', [RoleController::class, 'getList'])->name('getListRole');
+// Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
+// Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
+// Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
+
 // Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
 // Route::post('create', [ProjectController::class, 'store'])->name('create');
 // Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
