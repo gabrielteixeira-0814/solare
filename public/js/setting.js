@@ -38,7 +38,7 @@
             method: 'GET',
             data: '' 
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
                 if(data) {
                     setTimeout(function() { 
                         $('#idBoards').val(data.boards.id);
