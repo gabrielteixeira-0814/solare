@@ -31,4 +31,10 @@ class RoleController extends Controller
             return view('list.listRole', compact('listRole', 'search'));
         }
     }
+
+    public function show($id)
+    {
+        return $role = Role::find($id);
+    }
+
 }

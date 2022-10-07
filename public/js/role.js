@@ -53,9 +53,8 @@
 
         var id = $(this).val();
 
-        console.log(id);
         $.ajax({
-            url: "/user/"+ id + "",
+            url: "/role/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
@@ -66,13 +65,10 @@
 
                         // Gif
                         $("#gif").hide();
-
                         $(".modalGif").show();
                         
                         $('.id').val(data.id)
                         $('.name').val(data.name)
-                        $('.email').val(data.email)
-                        $('.function').val(data.name)
                     }else {
                         console.log('Error');
                     }
@@ -86,11 +82,9 @@
 
         var id = $("#id").val();
         var name = $("#name").val();
-        var email = $("#email").val();
-        var funct = $("#function").val();
 
         $.ajax({
-            url: "/user/edit",
+            url: "/role/edit",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id, name: name, email: email, funct: funct},

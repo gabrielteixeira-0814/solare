@@ -69,11 +69,11 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="role" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold; color: #0099B2">Editar Usuário</h5>
+        <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold; color: #0099B2">Editar Funções</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -81,7 +81,7 @@
       <div class="row justify-content-center">
         <div class="col-10 mt-2">
           <div class="alert alert-success text-center" id="successEdit" role="alert">
-            Usuário editado com sucesso!
+            Função editada com sucesso!
           </div>
         </div>
       </div>
@@ -105,17 +105,9 @@
           <form action="" class="form_user" id="form_user">
               <input type="hidden" class="id" id="id" name="id">
               <div class="mb-3">
-                <label for="name" class="form-label">Nome</label>
+                <label for="name" class="form-label">Função</label>
                 <input type="text" class="form-control name" id="name" name="name" aria-describedby="name">
               </div>
-              <div class="mb-3">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" class="form-control email" id="email" name="email">
-              </div>
-              <div class="mb-3">
-                  <label for="function" class="form-label">Função</label>
-                  <input type="text" class="form-control function" id="function" name="function">
-                </div>
           </form>
       </div>
       <div class="modal-footer">
