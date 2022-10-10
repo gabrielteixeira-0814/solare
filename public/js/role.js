@@ -58,7 +58,7 @@
             method: 'GET',
             data: "" 
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
 
                 setTimeout(function() { 
                     if(data) {
@@ -92,7 +92,7 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id, name: name},
                 }).done(function(data){
-                //console.log(data);
+                console.log(data);
                     
                 if(data) {
                     $("#successEdit").show();
