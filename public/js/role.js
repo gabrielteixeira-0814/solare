@@ -1,8 +1,8 @@
 
-    /*** Table Users ***/
+    /*** Table role ***/
 
     $(document).ready(function(){
-        carregarTabelaUser(0);
+        carregarTabelaRole(0);
 
         $("#successDelete").hide(); // hide message success delete
 
@@ -12,15 +12,15 @@
     $(document).on('click', '.paginationRole a', function(e) {
         e.preventDefault();
         var pagina = $(this).attr('href').split('page=')[1];
-        carregarTabelaUser(pagina);
+        carregarTabelaRole(pagina);
     });
 
     $("#search").keyup(function() {
-        carregarTabelaUser(0);
+        carregarTabelaRole(0);
       });
 
-    // Search user
-    function carregarTabelaUser(pagina) {
+    // Search role
+    function carregarTabelaRole(pagina) {
 
          // Gif
          $('.roles_data').html('<div class="d-flex justify-content-center mt-3 loading">Loading&#8230;</div>');
@@ -44,7 +44,7 @@
         });
     }
 
-    // Show user
+    // Show role
     $(document).on('click', '.edit', function(e) {
 
         $("#successEdit").hide(); //hide message
@@ -76,18 +76,21 @@
             });
     });
 
-    // Edit user
+    // Edit role
     $(document).on('click', '.saveEdit', function(e) {
         $(".saveEdit").show();
 
         var id = $("#id").val();
         var name = $("#name").val();
 
+        console.log(id);
+        console.log(name);
+
         $.ajax({
             url: "/role/edit",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id, name: name, email: email, funct: funct},
+            data: {id: id, name: name},
                 }).done(function(data){
                 //console.log(data);
                     
@@ -95,7 +98,7 @@
                     $("#successEdit").show();
                     $(".saveEdit").hide();
 
-                    carregarTabelaUser(0);
+                    carregarTabelaRole(0);
                 }
             }).fail(function(error) {
 
@@ -172,7 +175,7 @@
                     $("#successCreate").show();
                     $(".saveForm").hide();
 
-                    carregarTabelaUser(0);
+                    carregarTabelaRole(0);
                 }
             })
             .fail(function(error) {
@@ -207,7 +210,7 @@
 
                     if(data) {
                         $("#successDelete").show();
-                        carregarTabelaUser(0);
+                        carregarTabelaRole(0);
                         
                         setTimeout(function() { 
                             $("#successDelete").hide();
