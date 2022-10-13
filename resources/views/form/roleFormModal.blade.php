@@ -1,5 +1,5 @@
 
-{{-- Form permission --}}
+{{-- Form role --}}
   <div class="form-permission">
       <form action="" class="form_permission" id="form_permission">
           <input type="hidden" class="" id="id" name="id">

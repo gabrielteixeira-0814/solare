@@ -125,14 +125,14 @@
 
 
     // Return Form user
-    $(document).on('click', '.createUser', function(e) {
+    $(document).on('click', '.createRole', function(e) {
 
         $("#successCreate").hide(); //hide message
         $(".modalFormGif").hide();
         $("#gifForm").show();
 
         $.ajax({
-            url: "/users/form",
+            url: "/role/form",
             method: 'GET',
             data: '' 
                 }).done(function(data){

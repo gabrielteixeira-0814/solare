@@ -65,6 +65,8 @@ Route::post('/permission/create', [PermissionController::class, 'store'])->name(
 Route::get('/permission/list', [PermissionController::class, 'getList'])->name('getPermission');
 Route::get('/permission/form', [PermissionController::class, 'formPermission'])->name('formPermission');
 Route::post('/permission/edit', [PermissionController::class, 'update'])->name('editPermission');
+Route::get('/permission/{id}', [PermissionController::class, 'show'])->name('showPermission');  
+Route::get('/permission/delete/{id}', [PermissionController::class, 'delete'])->name('deletePermission');
 
 // Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
 // Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
@@ -77,7 +79,6 @@ Route::post('/permission/edit', [PermissionController::class, 'update'])->name('
 
 // Home
 //Route::get('/', [HomeController::class, 'home'])->name('home');
-
 
 
 // Teste

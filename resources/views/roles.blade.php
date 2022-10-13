@@ -25,12 +25,12 @@
 </div>
 
 
-<!-- Modal form Users -->
-<div class="modal fade" id="userForm" tabindex="-1" role="dialog" aria-labelledby="modalFomrUser" aria-hidden="true">
+<!-- Modal form roles -->
+<div class="modal fade" id="roleForm" tabindex="-1" role="dialog" aria-labelledby="modalFormRole" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="modalFomrUser" style="font-weight: bold; color: #0099B2">Criar Usuário</h5>
+        <h5 class="modal-title" id="modalFomrUser" style="font-weight: bold; color: #0099B2">Criar Função</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -38,7 +38,7 @@
       <div class="row justify-content-center">
         <div class="col-10 mt-2">
           <div class="alert alert-success text-center" id="successCreate" role="alert">
-            Usuário criado com sucesso!
+            Função criada com sucesso!
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
       </div>
       
       <div class="modal-body modalFormGif">
-          <div class="form-user"></div>
+          <div class="form-role"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary closeCreate" data-dismiss="modal">Fechar</button>

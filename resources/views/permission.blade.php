@@ -69,7 +69,7 @@
 </div>
 
 <!-- Modal Edit -->
-<div class="modal fade" id="role" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="permission" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -102,7 +102,7 @@
       </div>
       
       <div class="modal-body modalGif">
-          <form action="" class="form_user" id="form_user">
+          <form action="" class="form_permission" id="form_permission">
               <input type="hidden" class="id" id="id" name="id">
               <div class="mb-3">
                 <label for="name" class="form-label">Permissão</label>

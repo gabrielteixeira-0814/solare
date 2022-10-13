@@ -52,7 +52,7 @@
         $("#gif").show();
 
         var id = $(this).val();
-
+        //console.log(id);
         $.ajax({
             url: "/permission/"+ id + "",
             method: 'GET',
@@ -79,12 +79,8 @@
     // Edit permission
     $(document).on('click', '.saveEdit', function(e) {
         $(".saveEdit").show();
-
         var id = $("#id").val();
         var name = $("#name").val();
-
-        console.log(id);
-        console.log(name);
 
         $.ajax({
             url: "/permission/edit",
@@ -103,8 +99,8 @@
             }).fail(function(error) {
 
                 // Message errors
-                console.log("error");
-                console.log(error.responseJSON.errors);
+                //console.log("error");
+                //console.log(error.responseJSON.errors);
 
                 $.each(error.responseJSON.errors, function( k, v ) {
                     $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
@@ -193,15 +189,17 @@
     });
        
 
-    // Show user
+    // Delete permission
     $(document).on('click', '.delete', function(e) {
 
-        var id = $(this).val();
+        var id = $(this).val();0
         $.ajax({
-            url: "/user/delete/"+ id + "",
+            url: "/permission/delete/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
+
+                    console.log(data);
 
                     if(data) {
                         $("#successDelete").show();

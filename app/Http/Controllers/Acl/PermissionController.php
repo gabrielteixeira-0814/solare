@@ -17,7 +17,8 @@ class PermissionController extends Controller
 
     public function formPermission()
     {
-        return view('form.permissionFormModal')->render();
+        $listPermissionSelect = Permission::all();
+        return view('form.permissionFormModal', compact('listPermissionSelect'))->render();
     }
     
     public function getList(Request $request)
@@ -46,12 +47,18 @@ class PermissionController extends Controller
 
     public function show($id)
     {
-        return $role = Role::find($id);
+        return $permission = Permission::find($id);
     }
 
     public function update(Request $request)
     {
         $permission = Permission::find($request['id']);
         return   $permission->update(['name' => $request['name']]);
+    }
+
+    public function delete(Request $request) 
+    {
+        $permission = Permission::find($request['id']);
+        return   $permission->delete(['name' => $request['name']]);
     }
 }

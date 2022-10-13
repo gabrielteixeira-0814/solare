@@ -32,3 +32,4 @@
         <p>{{ $listPermission->links() }}</p>
     </div>
 @endif
+
