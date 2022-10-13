@@ -60,7 +60,11 @@ Route::get('/role/list', [RoleController::class, 'getList'])->name('getListRole'
 Route::get('/role/{id}', [RoleController::class, 'show'])->name('showRole');  
 Route::post('/role/edit', [RoleController::class, 'update'])->name('editRole');
 
+Route::get('/permission', [PermissionController::class, 'index'])->name('pagePermission');
 Route::post('/permission/create', [PermissionController::class, 'store'])->name('createPermission');
+Route::get('/permission/list', [PermissionController::class, 'getList'])->name('getPermission');
+Route::get('/permission/form', [PermissionController::class, 'formPermission'])->name('formPermission');
+Route::post('/permission/edit', [PermissionController::class, 'update'])->name('editPermission');
 
 // Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
 // Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');

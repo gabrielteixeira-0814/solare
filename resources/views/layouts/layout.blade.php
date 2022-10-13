@@ -46,8 +46,11 @@
                          <a href="{{ route('pageUsers')}}" class="nav_link"> <i class='bx bx-user nav_icon'></i>
                             <span class="nav_name">Usuários</span>
                         </a> 
-                        <a href="{{ route('pageSetting')}}" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
+                        <a href="{{ route('pageRole')}}" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
                             <span class="nav_name">Funções</span>
+                        </a>
+                        <a href="{{ route('pagePermission')}}" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i>
+                            <span class="nav_name">Permissiões</span>
                         </a>
                         <a href="{{ route('pageSetting')}}" class="nav_link"><i class='bx bx-cog nav_icon'></i>
                             <span class="nav_name">Configurações</span>

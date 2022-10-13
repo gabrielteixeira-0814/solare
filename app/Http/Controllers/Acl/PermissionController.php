@@ -11,61 +11,47 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        //
+        $role = Permission::get();
+        return view('permission');
     }
 
-
-    public function getList()
+    public function formPermission()
     {
-        //
+        return view('form.permissionFormModal')->render();
     }
-
-     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    
+    public function getList(Request $request)
     {
-        //
+        if($request->ajax()){
+            $search = !$request['search'] ? true : false;
+           
+            if($request['search']){
+
+                $permission = new Permission();
+                $listPermission = $permission->where('name', 'LIKE', '%'.$request['search'].'%')->get();
+            }else {
+                $listPermission = Permission::paginate(2);
+            }
+
+            return view('list.listPermission', compact('listPermission', 'search'));
+        }
     }
 
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-
-        $this->validate($request, [
-            'permission' => 'required',
-        ]);
-        return $request;
-        // // Criar uma função
-        // $role = Role::create(['guard_name' => 'web', 'name' => $request->input('name')]);
-
-        //  // Acrescentar as permissões para a função criada acima
-        // $role->syncPermissions($request["permission"]); // EX: $request[1,2]
-        
-        return 'Função criada com sucesso!';
+        if($request->ajax()){
+            return $permission = Permission::create(['name' => $request['name']]);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-       //
+        return $role = Role::find($id);
     }
 
-    public function destroy($id)
+    public function update(Request $request)
     {
-        DB::table("roles")->where('id',$id)->delete();
-        return ('Função deletada com sucesso!');
+        $permission = Permission::find($request['id']);
+        return   $permission->update(['name' => $request['name']]);
     }
 }
