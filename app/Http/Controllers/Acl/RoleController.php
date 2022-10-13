@@ -32,6 +32,34 @@ class RoleController extends Controller
         }
     }
 
+    public function formRole()
+    {
+        $listPermissionSelect = Permission::all();
+        return view('form.roleFormModal', compact('listPermissionSelect'))->render();
+    }
+
+    public function store(Request $request)
+    {
+        $list = [];
+
+        // list permission
+        $listPermission = Permission::all();
+
+        foreach ($listPermission as $permission) {
+
+            if($request[$permission->name]){
+                $list[] = $request[$permission->name];
+            }
+        }
+
+        $role = Role::create(['name' => $request['role']]);
+
+        // Acrescentar as permissões para a função criada acima
+        $role->syncPermissions($list); // EX: $request[1,2]
+
+        return $role;
+    }
+
     public function show($id)
     {
         return $role = Role::find($id);

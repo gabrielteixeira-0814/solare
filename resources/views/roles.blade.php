@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="col-6 py-3 text-end">
-        <button type="button" class="btn btn-success createUser" data-toggle="modal" data-target="#userForm" >Funções <i class='bx bx-user nav_icon' style="font-size: 15px"></i></button>
+        <button type="button" class="btn btn-success createRole" data-toggle="modal" data-target="#roleForm" >Funções <i class='bx bx-user nav_icon' style="font-size: 15px"></i></button>
       </div>
         {{-- Insere a pagina listRole.blade.php --}}
         <div class="roles_data"></div>

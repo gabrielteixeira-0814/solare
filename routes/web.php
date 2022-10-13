@@ -54,12 +54,15 @@ Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('set
 Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
 Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
 
-// Roles / Permissions
+// Roles 
 Route::get('/role', [RoleController::class, 'index'])->name('pageRole');
 Route::get('/role/list', [RoleController::class, 'getList'])->name('getListRole');
 Route::get('/role/{id}', [RoleController::class, 'show'])->name('showRole');  
 Route::post('/role/edit', [RoleController::class, 'update'])->name('editRole');
+Route::get('/roleForm', [RoleController::class, 'formRole'])->name('formRoles');
+Route::post('/role/create', [RoleController::class, 'store'])->name('createRole');
 
+// Permissions
 Route::get('/permission', [PermissionController::class, 'index'])->name('pagePermission');
 Route::post('/permission/create', [PermissionController::class, 'store'])->name('createPermission');
 Route::get('/permission/list', [PermissionController::class, 'getList'])->name('getPermission');

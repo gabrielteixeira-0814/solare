@@ -124,7 +124,7 @@
     });
 
 
-    // Return Form user
+    // Return Form Role
     $(document).on('click', '.createRole', function(e) {
 
         $("#successCreate").hide(); //hide message
@@ -132,11 +132,11 @@
         $("#gifForm").show();
 
         $.ajax({
-            url: "/role/form",
+            url: "/roleForm",
             method: 'GET',
             data: '' 
                 }).done(function(data){
-                //console.log(data);
+
                 setTimeout(function() { 
                     if(data) {
 
@@ -145,31 +145,31 @@
                         
                          $(".modalFormGif").show();
 
-                        $('.form-user').html(data);
+                        $('.form-role').html(data);
                     }else {
-                        $('.form-user').html('<div class="">Error</div>');
+                        $('.form-role').html('<div class="">Error</div>');
                     }
                 }, 500);
             });
     });
 
-    // Create user
+    // Create Role
+    
     $(document).on('click', '.saveForm', function(e) {
         $(".saveForm").show();
 
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var funct = $("#function").val();
-        var password = $("#password").val();
-        var password_confirmation = $("#password_confirmation").val();
+        valor = $("form").serialize();
+
+        console.log(valor);
 
         $.ajax({
-            url: "/user",
+            url: "/role/create",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {name: name, email: email, password: password, password_confirmation: password_confirmation, funct: funct},
+            data: valor,
                 }).done(function(data){
-                //console.log(data);
+                    
+                console.log(data);
                     
                 if(data) {
                     $("#successCreate").show();
