@@ -17,13 +17,12 @@
         </div>
       </div>
       <div class="col-6 py-3 text-end">
-        <button type="button" class="btn btn-success createRole" data-toggle="modal" data-target="#roleForm" >Funções <i class='bx bx-user nav_icon' style="font-size: 15px"></i></button>
+        <button type="button" class="btn btn-success createRole" data-toggle="modal" data-target="#roleForm" >Funções</button>
       </div>
         {{-- Insere a pagina listRole.blade.php --}}
         <div class="roles_data"></div>
     </div>
 </div>
-
 
 <!-- Modal form roles -->
 <div class="modal fade" id="roleForm" tabindex="-1" role="dialog" aria-labelledby="modalFormRole" aria-hidden="true">
@@ -107,6 +106,12 @@
               <div class="mb-3">
                 <label for="name" class="form-label">Função</label>
                 <input type="text" class="form-control name" id="name" name="name" aria-describedby="name">
+              </div>
+              <div class="mb-3">
+                <label for="checkbox" class="form-label">Permissões</label>
+              </div>
+              <div class="form-check divlistPermission">
+                <div class="listPermission"></div>
               </div>
           </form>
       </div>

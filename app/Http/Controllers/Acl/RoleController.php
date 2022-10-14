@@ -70,4 +70,23 @@ class RoleController extends Controller
         $role = Role::find($request['id']);
         return   $role->update(['name' => $request['name']]);
     }
+
+    public function delete(Request $request) 
+    {
+        $role = Role::find($request['id']);
+        return   $role->delete(['name' => $request['name']]);
+    }
+
+    // Verifica quais Permissões são daquela função
+    public function rolePermission(Request $request) 
+    {
+        $list = [];
+        $role = Role::find(10);
+
+        foreach ($role->permissions as $item ) {
+            $list[] = $item->pivot->permission_id;
+        }
+
+        return $list;
+    }
 }

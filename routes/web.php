@@ -61,15 +61,19 @@ Route::get('/role/{id}', [RoleController::class, 'show'])->name('showRole');
 Route::post('/role/edit', [RoleController::class, 'update'])->name('editRole');
 Route::get('/roleForm', [RoleController::class, 'formRole'])->name('formRoles');
 Route::post('/role/create', [RoleController::class, 'store'])->name('createRole');
+Route::get('/role/delete/{id}', [RoleController::class, 'delete'])->name('deleteRole');
+Route::get('/rolePermission', [RoleController::class, 'rolePermission'])->name('rolePermission');
 
 // Permissions
 Route::get('/permission', [PermissionController::class, 'index'])->name('pagePermission');
 Route::post('/permission/create', [PermissionController::class, 'store'])->name('createPermission');
 Route::get('/permission/list', [PermissionController::class, 'getList'])->name('getPermission');
+Route::get('/role/permission/list', [PermissionController::class, 'getListPermission'])->name('getListPermission');
 Route::get('/permission/form', [PermissionController::class, 'formPermission'])->name('formPermission');
 Route::post('/permission/edit', [PermissionController::class, 'update'])->name('editPermission');
 Route::get('/permission/{id}', [PermissionController::class, 'show'])->name('showPermission');  
 Route::get('/permission/delete/{id}', [PermissionController::class, 'delete'])->name('deletePermission');
+
 
 // Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
 // Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');

@@ -3,7 +3,7 @@
 
     $(document).ready(function(){
         carregarTabelaRole(0);
-
+      
         $("#successDelete").hide(); // hide message success delete
 
     });
@@ -51,6 +51,8 @@
         $(".modalGif").hide();
         $("#gif").show();
 
+        carregarPermission();
+
         var id = $(this).val();
 
         $.ajax({
@@ -83,16 +85,13 @@
         var id = $("#id").val();
         var name = $("#name").val();
 
-        console.log(id);
-        console.log(name);
-
         $.ajax({
             url: "/role/edit",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {id: id, name: name},
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
                     
                 if(data) {
                     $("#successEdit").show();
@@ -103,8 +102,8 @@
             }).fail(function(error) {
 
                 // Message errors
-                console.log("error");
-                console.log(error.responseJSON.errors);
+                //console.log("error");
+                //console.log(error.responseJSON.errors);
 
                 $.each(error.responseJSON.errors, function( k, v ) {
                     $('.msgErrorEdit').append("<div class='alert alert-danger errorMsgEdit' role='alert'>" + v + "</div>");
@@ -121,6 +120,11 @@
     // close modal edit
     $(document).on('click', '.closeEdit', function(e) {
         $(".saveEdit").show();
+
+        // Remove list
+        $( ".listPermission" ).remove();
+
+        $('.divlistPermission').html("<div class='listPermission'></div>");
     });
 
 
@@ -198,12 +202,12 @@
     });
        
 
-    // Show user
+    // delete user
     $(document).on('click', '.delete', function(e) {
 
         var id = $(this).val();
         $.ajax({
-            url: "/user/delete/"+ id + "",
+            url: "/role/delete/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
@@ -222,4 +226,41 @@
             });
     });
        
-   
+    function carregarPermission() {
+
+        $.ajax({
+            url: "/rolePermission",
+            method: 'GET',
+            data: "" 
+                }).done(function(data){
+     
+                 if(data) {
+                    listPermission = data;
+                 }
+            });
+
+       $.ajax({
+       url: "/role/permission/list",
+       method: 'GET',
+       data: "" 
+           }).done(function(data){
+           console.log(listPermission);
+
+            if(data) {
+                $.each(data, function( k, v ) {
+
+                    if($.inArray(v.id, listPermission) !== -1) {
+
+                        console.log('tem');
+
+                    }else{
+
+                        console.log('nao');
+
+                    }
+
+                    $('.listPermission').append("<div class='form-check'><input class='form-check-input' type='checkbox' checked='true' name='"+ v.name +"'  value='"+ v.id +"' id='"+ v.name +"'><label class='' for='"+ v.name +"'>"+ v.name +"</label></div>");
+                });
+            }
+       });
+   }

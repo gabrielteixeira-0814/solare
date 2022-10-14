@@ -38,6 +38,11 @@ class PermissionController extends Controller
         }
     }
 
+    public function getListPermission()
+    {
+        return $listPermissionSelect = Permission::all();
+    }
+
     public function store(Request $request)
     {
         if($request->ajax()){
