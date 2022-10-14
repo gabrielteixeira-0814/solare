@@ -95,6 +95,8 @@ class RoleController extends Controller
 
         // Acrescentar as permissões para a função criada acima
         $role->syncPermissions($list); // EX: $request[1,2]
+
+        return $role;
     }
 
     public function delete(Request $request) 

@@ -5,11 +5,11 @@
           <input type="hidden" class="" id="id" name="id">
           <div class="mb-3">
             <label for="name" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+            <input type="text" class="form-control" id="namea" name="namea" aria-describedby="name">
           </div>
           <div class="mb-3">
             <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="emailaa" name="emailaa">
           </div>
           <div class="mb-3">
             <label for="function" class="form-label">Função</label>
@@ -23,6 +23,17 @@
             <label for="password_confirmation" class="form-label">Confirme a senha</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
           </div>
+          <div class="mb-3">
+            <label for="checkbox" class="form-label">Permissões</label>
+          </div>
+        @foreach ( $listRoleSelect as $role)
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="{{$role->name}}"  value="{{$role->id}}" id="{{$role->name}}">
+            <label class="form-check-label" for="{{$role->name}}">
+            {{ $role->name }}
+            </label>
+          </div>
+        @endforeach
       </form>
   </div>
         

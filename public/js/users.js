@@ -160,19 +160,23 @@
     $(document).on('click', '.saveForm', function(e) {
         $(".saveForm").show();
 
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var funct = $("#function").val();
-        var password = $("#password").val();
-        var password_confirmation = $("#password_confirmation").val();
+        // var name = $("#name").val();
+        // var email = $("#email").val();
+        // var funct = $("#function").val();
+        // var password = $("#password").val();
+        // var password_confirmation = $("#password_confirmation").val();
+
+        value = $("form.form_user").serialize();
+
+        console.log(value);
 
         $.ajax({
             url: "/user",
             method: 'POST',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {name: name, email: email, password: password, password_confirmation: password_confirmation, funct: funct},
+            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: value,
                 }).done(function(data){
-                //console.log(data);
+                console.log(data);
                     
                 if(data) {
                     $("#successCreate").show();

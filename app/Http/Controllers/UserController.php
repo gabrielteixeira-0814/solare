@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserController extends Controller
 {
@@ -21,7 +23,8 @@ class UserController extends Controller
 
     public function formUser()
     {
-        return view('form.userFormModal')->render();
+        $listRoleSelect = Role::all();
+        return view('form.userFormModal', compact('listRoleSelect'))->render();
     }
     
     public function getList(Request $request)
@@ -41,6 +44,8 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+
+        return $request;
         return $this->service->store($request);
     }
 

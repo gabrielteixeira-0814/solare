@@ -13,11 +13,11 @@
       <div class="col-6 py-4">
         <div>
           <span class="p-2" >Pesquisar:</span> 
-          <input type="text" class="rounded" id="search" name="search" placeholder="John Doe...">
+          <input type="text" class="rounded" id="search" name="search" placeholder="Criar...">
         </div>
       </div>
       <div class="col-6 py-3 text-end">
-        <button type="button" class="btn btn-success createPermission" data-toggle="modal" data-target="#permissionForm" >Permissão <i class='bx bx-user nav_icon' style="font-size: 15px"></i></button>
+        <button type="button" class="btn btn-success createPermission" data-toggle="modal" data-target="#permissionForm" >Permissão</button>
       </div>
         {{-- Insere a pagina listRole.blade.php --}}
         <div class="permission_data"></div>

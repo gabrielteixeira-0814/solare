@@ -17,6 +17,7 @@ class UserService
 
     public function store($request)
     {
+        return $request;
         $message = [
             'name.required' => 'O nome do usuário é obrigatório!',
             'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
@@ -49,6 +50,15 @@ class UserService
         //     $file = $file->storeAs('users', $nameFile);
         //     $data['avatar'] = $file;
         // }
+
+        return $data;
+
+        if($this->repo->store($data)){
+            // Inserindo função
+            //$user->assignRole(['writer', 'admin']);
+        }
+        
+
         return $this->repo->store($data);
     }
 

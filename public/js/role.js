@@ -83,7 +83,6 @@
         $(".saveEdit").show();
 
         value = $("form").serialize();
-        console.log(value);
 
         $.ajax({
             url: "/role/edit",
@@ -91,7 +90,6 @@
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: value,
                 }).done(function(data){
-                console.log(data);
                     
                 if(data) {
                     $("#successEdit").show();
@@ -236,7 +234,6 @@
 
                  if(data) {
                     listPermission = data;
-                    //console.log(data);
                  }
             });
 
