@@ -62,7 +62,7 @@ Route::post('/role/edit', [RoleController::class, 'update'])->name('editRole');
 Route::get('/roleForm', [RoleController::class, 'formRole'])->name('formRoles');
 Route::post('/role/create', [RoleController::class, 'store'])->name('createRole');
 Route::get('/role/delete/{id}', [RoleController::class, 'delete'])->name('deleteRole');
-Route::get('/rolePermission', [RoleController::class, 'rolePermission'])->name('rolePermission');
+Route::get('/rolePermission/{id}', [RoleController::class, 'rolePermission'])->name('rolePermission');
 
 // Permissions
 Route::get('/permission', [PermissionController::class, 'index'])->name('pagePermission');

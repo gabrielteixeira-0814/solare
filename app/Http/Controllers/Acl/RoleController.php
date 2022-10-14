@@ -67,8 +67,34 @@ class RoleController extends Controller
 
     public function update(Request $request)
     {
+        // Remove todas as permissões
+        $listPermission = [];
         $role = Role::find($request['id']);
-        return   $role->update(['name' => $request['name']]);
+
+        $rolePermission = $role->permissions;
+
+        foreach ($rolePermission as $item ) {
+            if($request[$item->name]){
+                $role->revokePermissionTo($item->pivot->permission_id);
+            }
+        }
+
+
+        // list permission
+        $list = [];
+        $listPermission = Permission::all();
+
+        foreach ($listPermission as $permission) {
+
+            if($request[$permission->name]){
+                $list[] = $request[$permission->name];
+            }
+        }
+
+        $role->update(['name' => $request['name']]);
+
+        // Acrescentar as permissões para a função criada acima
+        $role->syncPermissions($list); // EX: $request[1,2]
     }
 
     public function delete(Request $request) 
@@ -78,10 +104,10 @@ class RoleController extends Controller
     }
 
     // Verifica quais Permissões são daquela função
-    public function rolePermission(Request $request) 
+    public function rolePermission($id) 
     {
         $list = [];
-        $role = Role::find(10);
+        $role = Role::find($id);
 
         foreach ($role->permissions as $item ) {
             $list[] = $item->pivot->permission_id;

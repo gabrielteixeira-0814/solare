@@ -47,13 +47,13 @@
     // Show role
     $(document).on('click', '.edit', function(e) {
 
+        var id = $(this).val();
+
         $("#successEdit").hide(); //hide message
         $(".modalGif").hide();
         $("#gif").show();
 
-        carregarPermission();
-
-        var id = $(this).val();
+        carregarPermission(id);
 
         $.ajax({
             url: "/role/"+ id + "",
@@ -82,16 +82,16 @@
     $(document).on('click', '.saveEdit', function(e) {
         $(".saveEdit").show();
 
-        var id = $("#id").val();
-        var name = $("#name").val();
+        value = $("form").serialize();
+        console.log(value);
 
         $.ajax({
             url: "/role/edit",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id, name: name},
+            data: value,
                 }).done(function(data){
-                //console.log(data);
+                console.log(data);
                     
                 if(data) {
                     $("#successEdit").show();
@@ -162,15 +162,15 @@
     $(document).on('click', '.saveForm', function(e) {
         $(".saveForm").show();
 
-        valor = $("form").serialize();
+        value = $("form").serialize();
 
-        console.log(valor);
+        // console.log(value);
 
         $.ajax({
             url: "/role/create",
             method: 'POST',
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: valor,
+            data: value,
                 }).done(function(data){
                     
                 console.log(data);
@@ -226,16 +226,17 @@
             });
     });
        
-    function carregarPermission() {
+    function carregarPermission(id) {
 
         $.ajax({
-            url: "/rolePermission",
+            url: "/rolePermission/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
-     
+
                  if(data) {
                     listPermission = data;
+                    //console.log(data);
                  }
             });
 
@@ -244,22 +245,20 @@
        method: 'GET',
        data: "" 
            }).done(function(data){
-           console.log(listPermission);
 
             if(data) {
                 $.each(data, function( k, v ) {
 
-                    if($.inArray(v.id, listPermission) !== -1) {
+                    ckeck = '';
 
-                        console.log('tem');
-
-                    }else{
-
-                        console.log('nao');
-
+                    if(listPermission){
+                        // Verifica se a permissão já existe, se existir colocar como ativo
+                        if($.inArray(v.id, listPermission) !== -1) {
+                            ckeck = 'checked';
+                        }
                     }
 
-                    $('.listPermission').append("<div class='form-check'><input class='form-check-input' type='checkbox' checked='true' name='"+ v.name +"'  value='"+ v.id +"' id='"+ v.name +"'><label class='' for='"+ v.name +"'>"+ v.name +"</label></div>");
+                    $('.listPermission').append("<div class='form-check'><input class='form-check-input' type='checkbox' "+ckeck+" name='"+ v.name +"'  value='"+ v.id +"' id='"+ v.name +"'><label class='' for='"+ v.name +"'>"+ v.name +"</label></div>");
                 });
             }
        });
