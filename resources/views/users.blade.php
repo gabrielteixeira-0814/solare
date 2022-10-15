@@ -102,7 +102,7 @@
       </div>
       
       <div class="modal-body modalGif">
-          <form action="" class="form_user" id="form_user">
+          <form action="" class="form_user_edit" id="form_user_edit">
               <input type="hidden" class="id" id="id" name="id">
               <div class="mb-3">
                 <label for="name" class="form-label">Nome</label>
@@ -113,9 +113,11 @@
                 <input type="email" class="form-control email" id="email" name="email">
               </div>
               <div class="mb-3">
-                  <label for="function" class="form-label">Função</label>
-                  <input type="text" class="form-control function" id="function" name="function">
-                </div>
+                <label for="checkbox" class="form-label">Permissões</label>
+              </div>
+              <div class="form-check divlistRole">
+                <div class="listRole"></div>
+              </div>
           </form>
       </div>
       <div class="modal-footer">

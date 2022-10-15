@@ -39,6 +39,7 @@ Route::get('/user/{id}', [UserController::class, 'get'])->name('getUser');
 Route::post('/user', [UserController::class, 'store'])->name('postUser');
 Route::post('/user/edit', [UserController::class, 'update'])->name('putUser');
 Route::get('/user/delete/{id}', [UserController::class, 'delete'])->name('deleteUser');
+Route::get('/userRole/{id}', [UserController::class, 'userRole'])->name('userRole');
 
 // Project
 Route::get('/project/list', [ProjectController::class, 'getList'])->name('getListProject');
@@ -56,6 +57,7 @@ Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('
 // Roles 
 Route::get('/role', [RoleController::class, 'index'])->name('pageRole');
 Route::get('/role/list', [RoleController::class, 'getList'])->name('getListRole');
+Route::get('/user/role/list', [RoleController::class, 'getListRole'])->name('getListRole');
 Route::get('/role/{id}', [RoleController::class, 'show'])->name('showRole');  
 Route::post('/role/edit', [RoleController::class, 'update'])->name('editRole');
 Route::get('/roleForm', [RoleController::class, 'formRole'])->name('formRoles');

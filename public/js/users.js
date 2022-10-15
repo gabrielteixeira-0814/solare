@@ -53,13 +53,15 @@
 
         var id = $(this).val();
 
-        console.log(id);
+        carregarRole(id);
+
+        //console.log(id);
         $.ajax({
             url: "/user/"+ id + "",
             method: 'GET',
             data: "" 
                 }).done(function(data){
-                console.log(data);
+                //console.log(data);
 
                 setTimeout(function() { 
                     if(data) {
@@ -84,16 +86,13 @@
     $(document).on('click', '.saveEdit', function(e) {
         $(".saveEdit").show();
 
-        var id = $("#id").val();
-        var name = $("#name").val();
-        var email = $("#email").val();
-        var funct = $("#function").val();
+        value = $(".form_user_edit").serialize();
 
         $.ajax({
             url: "/user/edit",
             method: 'POST',
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {id: id, name: name, email: email, funct: funct},
+            //headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: value,
                 }).done(function(data){
                 //console.log(data);
                     
@@ -124,6 +123,12 @@
     // close modal edit
     $(document).on('click', '.closeEdit', function(e) {
         $(".saveEdit").show();
+
+        // Remove list
+        $( ".listRole" ).remove();
+
+        $('.divlistRole').html("<div class='listRole'></div>");
+
     });
 
 
@@ -160,15 +165,7 @@
     $(document).on('click', '.saveForm', function(e) {
         $(".saveForm").show();
 
-        // var name = $("#name").val();
-        // var email = $("#email").val();
-        // var funct = $("#function").val();
-        // var password = $("#password").val();
-        // var password_confirmation = $("#password_confirmation").val();
-
-        value = $("form.form_user").serialize();
-
-        console.log(value);
+        value = $(".form_user").serialize();
 
         $.ajax({
             url: "/user",
@@ -205,7 +202,7 @@
     });
        
 
-    // Show user
+    // Delete user
     $(document).on('click', '.delete', function(e) {
 
         var id = $(this).val();
@@ -230,3 +227,42 @@
     });
        
    
+    function carregarRole(id) {
+
+        $.ajax({
+            url: "/userRole/"+ id + "",
+            method: 'GET',
+            data: "" 
+                }).done(function(data){
+
+                 if(data) {
+                    listRole = data;
+
+                    //console.log(listRole);
+                 }
+            });
+
+       $.ajax({
+       url: "/user/role/list",
+       method: 'GET',
+       data: "" 
+           }).done(function(data){
+
+            if(data) {
+                //console.log(data);
+                $.each(data, function( k, v ) {
+
+                    ckeck = '';
+
+                    if(listRole){
+                        // Verifica se a permissão já existe, se existir colocar como ativo
+                        if($.inArray(v.id, listRole) !== -1) {
+                            ckeck = 'checked';
+                        }
+                    }
+
+                    $('.listRole').append("<div class='form-check'><input class='form-check-input' type='checkbox' "+ckeck+" name='"+ v.name +"'  value='"+ v.id +"' id='"+ v.name +"'><label class='' for='"+ v.name +"'>"+ v.name +"</label></div>");
+                });
+            }
+       });
+    }

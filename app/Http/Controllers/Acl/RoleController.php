@@ -32,6 +32,11 @@ class RoleController extends Controller
         }
     }
 
+    public function getListRole()
+    {
+        return $listRoleSelect = Role::all();
+    }
+
     public function formRole()
     {
         $listPermissionSelect = Permission::all();

@@ -5,6 +5,9 @@ use App\Repositories\UserRepositoryInterface;
 use Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserService
 {
@@ -17,7 +20,6 @@ class UserService
 
     public function store($request)
     {
-        return $request;
         $message = [
             'name.required' => 'O nome do usuário é obrigatório!',
             'name.min' => 'É necessário no mínimo 5 caracteres no nome do usuário!',
@@ -51,15 +53,24 @@ class UserService
         //     $data['avatar'] = $file;
         // }
 
-        return $data;
+        $user = $this->repo->store($data);
+        if($user){
 
-        if($this->repo->store($data)){
             // Inserindo função
-            //$user->assignRole(['writer', 'admin']);
+            $list = [];
+            $listRole = Role::all();
+        
+            foreach ($listRole as $role) {
+
+                if($request[$role->name]){
+                    $list[] = $request[$role->name];
+                }
+            }
+    
+            $user->assignRole($list);
         }
         
-
-        return $this->repo->store($data);
+        return $user;
     }
 
     public function getList($request)
@@ -145,7 +156,33 @@ class UserService
         //     $file = $file->storeAs('users', $nameFile);
         //     $data['avatar'] = $file;
         // }
-        return $this->repo->update($data);
+
+        $user = $this->repo->update($data);
+        if($user){
+
+            // Remove todas as funcões
+            $user = User::find($request['id']);
+            $userRole = $user->roles;
+
+            //return $userRole;
+            foreach ($userRole as $item) {
+                $user->removeRole($item->pivot->role_id);
+            }
+
+            //Inserindo função
+            $list = [];
+            $listRole = Role::all();
+        
+            foreach ($listRole as $role) {
+
+                if($request[$role->name]){
+                    $list[] = $request[$role->name];
+                }
+            }
+            $user->assignRole($list);
+        }
+    
+        return $user;
     }
 
     public function destroy($id)
