@@ -1,8 +1,8 @@
 <?php 
 
 namespace App\Repositories;
-
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Setting;
 
 class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 {
@@ -15,8 +15,26 @@ class ProjectRepositoryEloquent implements ProjectRepositoryInterface
 
     public function connectionApiMonday()
     {
+
+        $data = Setting::all();
+
+        foreach ($data as $item) {
+            if($item->type == "boards"){
+                $boards = ['id' => $item->id, 'token' => $item->token];
+            }
+
+            if($item->type == "monday"){
+                $monday = ['id' => $item->id, 'token' => $item->token];
+            }
+
+            if($item->type == "company"){
+                $company = ['id' => $item->id, 'token' => $item->token];
+            }
+        }
+        $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
+
        // Conexão com api monday
-       $tokenMonday = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+       $tokenMonday = $list['monday']['token'];
        $headers = ['Content-Type: application/json', 'Authorization: ' . $tokenMonday];
 
        return $headers;

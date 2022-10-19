@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repositories\ProjectRepositoryInterface;
 use Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Setting;
 
 class ProjectService
 {
@@ -12,6 +13,27 @@ class ProjectService
     public function __construct(ProjectRepositoryInterface $repo)
     {
         $this->repo = $repo;
+    }
+
+    public function getBoardId()
+    {
+        $data = Setting::all();
+
+        foreach ($data as $item) {
+            if($item->type == "boards"){
+                $boards = ['id' => $item->id, 'token' => $item->token];
+            }
+
+            if($item->type == "monday"){
+                $monday = ['id' => $item->id, 'token' => $item->token];
+            }
+
+            if($item->type == "company"){
+                $company = ['id' => $item->id, 'token' => $item->token];
+            }
+        }
+        $list = ["boards" => $boards, 'monday' => $monday, 'company' => $company];
+        return $list;
     }
 
     public function getList($request)
@@ -36,12 +58,18 @@ class ProjectService
 
     public function store($jsonData)
     {
+        // Pega as informações das configurações de token
+        $setting = $this->getBoardId();
+
         // Array para salvar as informações no banco de dados
         $createProjectData = [];
         
        // Variáveis globais
-       $board_id = 3189733335; 
-       $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
+       $board_id = $setting['boards']['token'];
+
+       // formatar para tipo int
+       $board_id = intval($board_id);
+       $tokenSystem = $setting['company']['token']; 
        $headers = $this->repo->connectionApiMonday();
        $groups = $this->getListGroup();
         
@@ -88,6 +116,7 @@ class ProjectService
             ['status', '', 'status'],
         );
 
+       
        // Token validation
        if($jsonData['token'] == $tokenSystem) {
            
@@ -294,10 +323,16 @@ class ProjectService
     public function delete($jsonData)
     {
 
-        // Variáveis globais
-        $board_id = 3189733335; 
+        // Pega as informações das configurações de token
+        $setting = $this->getBoardId();
 
-        $tokenSystem = "ACUarqUqpZbP6307f0d8910c2"; 
+        // Variáveis globais
+        $board_id = $setting['boards']['token'];
+
+        // formatar para tipo int
+        $board_id = intval($board_id);
+
+        $tokenSystem = $setting['company']['token'];  
 
         $headers = $this->repo->connectionApiMonday();
 
@@ -385,8 +420,11 @@ class ProjectService
 
     public function getListGroup()
     {
+        // Pega as informações das configurações de token
+        $setting = $this->getBoardId();
+
        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+       $token = $setting['monday']['token'];
 
 
        $apiUrl = 'https://api.monday.com/v2';
@@ -423,10 +461,16 @@ class ProjectService
     public function getListColumns()
     {
         // Variáveis globais
-       $board_id = 3189733335; 
+        // Pega as informações das configurações de token
+        $setting = $this->getBoardId();
+
+        /** Conexão com api monday**/
+        $board_id = $setting['boards']['token']; 
+        // formatar para tipo int
+        $board_id = intval($board_id);
 
        /** Conexão com api monday**/
-       $token = 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjE3NzcyOTQ2NCwidWlkIjozMzEyNTQzMSwiaWFkIjoiMjAyMi0wOC0yNlQxOTo1NTo0NC4wMDBaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MTMwNTk3MDksInJnbiI6InVzZTEifQ.ePujvhvPa6V0wlcsQ7w_FbB4KyBZxlsNRuF-Nmq90Z0';
+       $token = $setting['monday']['token'];
 
 
        $apiUrl = 'https://api.monday.com/v2';

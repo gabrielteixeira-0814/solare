@@ -34,6 +34,11 @@ class ProjectController extends Controller
         return $this->service->get($id);
     }
 
+    public function teste()
+    {
+        return $this->service->getBoardId();
+    }
+
     public function store()
     {
        // Recebe webhook
