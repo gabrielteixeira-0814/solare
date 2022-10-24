@@ -1,6 +1,6 @@
 <h1 align="center">
     <img height="80" src="https://img.icons8.com/external-filled-outline-geotatah/64/000000/external-product-corporate-image-and-brand-management-filled-outline-filled-outline-geotatah-2.png" />
-    <p>Sales site</p>
+    <p>Created Monday</p>
 </h1>
 
 <h1>
@@ -11,7 +11,8 @@
 ## 🚨 About
 
 
-**Sales site** is a sales site created with the **LARAVEL** framework for the purpose of study and development with this technology, where you can register any type of product, and with an administration area and dashboard of the most sold products. 
+**Created Monday** 
+It is a system created to help companies to make a connection between two systems, receiving a webhook and sending the data to the Monday system, thus creating tables and projects on the platform.
 
 
 ## 🔨 Tools
@@ -29,6 +30,7 @@
 - [JQUERY](https://jquery.com/)
 - [AJAX](https://www.devmedia.com.br/o-que-e-o-ajax/6702)
 - [BOOTSTRAP](https://getbootstrap.com/docs/5.0/getting-started/introduction/) 
+- [SPATIE](https://spatie.be/docs/laravel-permission/v5/introduction) 
 
 
 ### Requirements
@@ -40,37 +42,37 @@
 
 ```bash
     # Clone the project
-    $ git clone https://github.com/gabrielteixeira-0814/Laravel-site-de-vendas.git  
+    $ git clone https://github.com/gabrielteixeira-0814/created-monday.git  
 ```
 
 ```bash
     # Enter directory
-    $ cd  Laravel-site-de-vendas
+    $ cd created-monday
 ```
 
 ```bash
-    # Install dependencies and framework
-    $ composer install
+    # Run command to use Sail or use default command 
+    $ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail' or ./vendor/bin/sail up
 ```
 
 ```bash
-    # Copy the .env.example file and paste it into the .env file and link it to a Mysql database
-    $ cp .env.example .env
+    # Run command to use Sail
+    $ sail up or sail up -d
 ```
 
 ```bash
-    # After relating the .env file with the MySql database, run the command below to start the database
-    $ php artisan migrate --seed
+    # Run the code to create fake profiles to populate the database
+    $ sail artisan migrate:fresh --seed
 ```
-
 ```bash
-    # This command will start a development server at http://localhost:8000
-    $ php artisan serve
+    # To start the server at address: 
+    http://localhost:80
+```
 ```
 
 ## 📝 License
 
-This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/Laravel-site-de-vendas/blob/main/LICENCE">LICENCE</a> for more details.
+This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/created-monday/blob/main/LICENCE">LICENCE</a> for more details.
 
 ---
 
