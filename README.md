@@ -72,7 +72,7 @@ It is a system created to help companies to make a connection between two system
 
 ## 📝 License
 
-This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/created-monday/blob/main/LICENCE">LICENCE</a> for more details.
+This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/solare/blob/main/LICENCE">LICENCE</a> for more details.
 
 ---
 
