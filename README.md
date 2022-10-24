@@ -1,5 +1,5 @@
 <h1 align="center">
-    <img height="80" src="https://img.icons8.com/external-filled-outline-geotatah/64/000000/external-product-corporate-image-and-brand-management-filled-outline-filled-outline-geotatah-2.png" />
+    <img height="80" src="https://img.icons8.com/external-phatplus-lineal-color-phatplus/64/000000/external-concept-digital-service-phatplus-lineal-color-phatplus.png"/>
     <p>Created Monday</p>
 </h1>
 
