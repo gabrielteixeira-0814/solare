@@ -1,64 +1,78 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">
+    <img height="80" src="https://img.icons8.com/external-filled-outline-geotatah/64/000000/external-product-corporate-image-and-brand-management-filled-outline-filled-outline-geotatah-2.png" />
+    <p>Sales site</p>
+</h1>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<h1>
+  <img src="public/img/vendas.gif" />
+</h1>
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🚨 About
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Sales site** is a sales site created with the **LARAVEL** framework for the purpose of study and development with this technology, where you can register any type of product, and with an administration area and dashboard of the most sold products. 
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🔨 Tools
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP
+- MYSQL
+- AJAX
+- HTML5
+- CSS
+- JAVASCRIPT
 
-## Laravel Sponsors
+## Libraries/Frameworks
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+- [LARAVEL](https://laravel.com/docs/8.x/installation)
+- [JQUERY](https://jquery.com/)
+- [AJAX](https://www.devmedia.com.br/o-que-e-o-ajax/6702)
+- [BOOTSTRAP](https://getbootstrap.com/docs/5.0/getting-started/introduction/) 
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### Requirements
 
-## Contributing
+- Have installed at least one composer package manager, [composer](https://getcomposer.org/).
+- It is necessary that you have a [MySql](https://www.mysql.com/) database for the connection.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 👨‍💻 How to Setup
 
-## Code of Conduct
+```bash
+    # Clone the project
+    $ git clone https://github.com/gabrielteixeira-0814/Laravel-site-de-vendas.git  
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+    # Enter directory
+    $ cd  Laravel-site-de-vendas
+```
 
-## Security Vulnerabilities
+```bash
+    # Install dependencies and framework
+    $ composer install
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+    # Copy the .env.example file and paste it into the .env file and link it to a Mysql database
+    $ cp .env.example .env
+```
 
-## License
+```bash
+    # After relating the .env file with the MySql database, run the command below to start the database
+    $ php artisan migrate --seed
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+    # This command will start a development server at http://localhost:8000
+    $ php artisan serve
+```
+
+## 📝 License
+
+This project is under the MIT license. See the file <a href="https://github.com/gabrielteixeira-0814/Laravel-site-de-vendas/blob/main/LICENCE">LICENCE</a> for more details.
+
+---
+
+<p align="center">Created by Gabriel Teixeira</p>
+
