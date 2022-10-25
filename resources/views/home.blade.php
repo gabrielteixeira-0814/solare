@@ -13,7 +13,7 @@
       <div class="col-6 py-4">
         <div>
           <span class="p-2" >Pesquisar:</span> 
-          <input type="text" class="rounded" id="search" name="search" placeholder="John Doe...">
+          <input type="text" class="rounded" id="search" name="search" placeholder="Projeto...">
         </div>
       </div>
       <div class="col-6 py-3 text-end">
