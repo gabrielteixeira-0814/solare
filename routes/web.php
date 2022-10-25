@@ -45,20 +45,26 @@ Route::group(['middleware' => ['auth']], function(){
 
 
 // Project
-Route::get('/project/teste', [ProjectController::class, 'teste'])->name('teste');
-Route::get('/project/list', [ProjectController::class, 'getList'])->name('getListProject');
-Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
+
 Route::post('create', [ProjectController::class, 'store'])->name('create');
-Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
 Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
 
+Route::group(['middleware' => ['auth']], function(){ 
+    Route::get('/project/teste', [ProjectController::class, 'teste'])->name('teste');
+    Route::get('/project/list', [ProjectController::class, 'getList'])->name('getListProject');
+    Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
+    Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
+});
+
+
 // Setting
-//Route::group(['middleware' => ['auth']], function(){ 
+Route::group(['middleware' => ['auth']], function(){ 
     Route::get('/setting', [SettingController::class, 'index'])->name('pageSetting');
     Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
     Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
     Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
-//});
+});
+
 // Roles 
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/role', [RoleController::class, 'index'])->name('pageRole');
@@ -83,22 +89,3 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/permission/{id}', [PermissionController::class, 'show'])->name('showPermission');  
     Route::get('/permission/delete/{id}', [PermissionController::class, 'delete'])->name('deletePermission');
 });
-
-
-// Route::get('/settingForm', [SettingController::class, 'formSetting'])->name('settingForm');
-// Route::get('/setting/list', [SettingController::class, 'getList'])->name('getListSetting');
-// Route::post('/setting/edit/board', [SettingController::class, 'update'])->name('editBoard');
-
-// Route::get('/project/{id}', [ProjectController::class, 'get'])->name('getProject');
-// Route::post('create', [ProjectController::class, 'store'])->name('create');
-// Route::get('listGroup', [ProjectController::class, 'getListGroup'])->name('getListGroup');
-// Route::post('delete', [ProjectController::class, 'delete'])->name('delete');
-
-// Home
-//Route::get('/', [HomeController::class, 'home'])->name('home');
-
-
-// Teste
-//Route::get('/ler', [ProductController::class, 'getRead'])->name('getRead');
-//Route::post('/create', [ProductController::class, 'store'])->name('create');
-//Route::post('delete', [ProductController::class, 'delete'])->name('delete');
