@@ -43,7 +43,6 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/userRole/{id}', [UserController::class, 'userRole'])->name('userRole');
 });
 
-
 // Project
 
 Route::post('create', [ProjectController::class, 'store'])->name('create');
