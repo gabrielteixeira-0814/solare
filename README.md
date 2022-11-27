@@ -50,6 +50,16 @@ It is a system created to help companies to make a connection between two system
 ```
 
 ```bash
+    # Run the command
+    $ composer install
+```
+
+```bash
+    # Install this command to use Sail
+    $ composer require laravel/sail --dev
+```
+
+```bash
     # Run command to use Sail or use default command 
     $ alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail' or ./vendor/bin/sail up
 ```
