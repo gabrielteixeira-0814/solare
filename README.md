@@ -77,7 +77,6 @@ It is a system created to help companies to make a connection between two system
     # To start the server at address: 
     http://localhost:80
 ```
-```
 
 ## 📝 License
 
@@ -86,4 +85,3 @@ This project is under the MIT license. See the file <a href="https://github.com/
 ---
 
 <p align="center">Created by Gabriel Teixeira</p>
-
