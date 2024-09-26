@@ -85,4 +85,3 @@ This project is under the MIT license. See the file <a href="https://github.com/
 ---
 
 <p align="center">Created by Gabriel Teixeira</p>
-
